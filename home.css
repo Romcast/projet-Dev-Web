@@ -1,0 +1,182 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+nav.title{
+    background-color: #eaccc5;
+    text-align: center;
+    font-family: Consolas, monaco, monospace;
+    border: thick double black;
+
+}
+.onglets{
+  color:white;
+  
+}
+.menu {
+    position: relative;
+    display: inline-block;
+    margin-top: 6px;
+    margin-left:10px;
+    
+  }
+  .titre {
+    margin: 0;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .categories {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    display: none;
+    z-index: 1;
+  }
+  
+  .categories li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .categories li:last-child {
+    border-bottom: none;
+  }
+  
+  .menu:hover .categories {
+    display: block;
+  }
+  #barre{
+    width:20%;
+}
+
+.affichage{
+  font-family: Consolas, monaco, monospace;
+  text-align: center;
+
+}
+
+
+#recette_moment{
+  border:120px;
+  border-radius:4px;
+  padding: 20px;
+  padding-top: 15px;
+  background-color: antiquewhite;
+  margin-left: 4px;
+  width: 98%;
+
+}
+
+.recette{
+  width:98%;
+  height:8em;
+  margin-left:3px;
+  border:2px solid rgb(102, 94, 94);
+  border-radius:4px;
+  padding: 10px;
+  display:flex;
+  justify-content: space-between;
+  
+
+}
+
+.plat{
+  height:7.5em;
+  width:7.5em;
+}
+
+.description_recette{
+  margin:10px;
+  width:50%;
+  
+
+}
+
+.texte_recette{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: baseline;
+  width: 100%;
+  color:red;
+  word-wrap: break-word;
+  margin:20px;
+  
+
+}
+
+.photo_user{
+  padding: 10px;
+  height:5em;
+  width:5em;
+}
+
+.user{
+  margin:auto;
+  
+}
+.slideshow-container {
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 1s;
+  cursor: pointer;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide img {
+  width: 400px; 
+  height: 300px;
+  margin-left:500px;
+  object-position: center;
+}
+
+.slide .caption {
+  position: absolute;
+  top: 75px;
+  left: 525px;
+  right: 600px;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 10px;
+  font-size: 100px;
+  font-family: Calibri, sans-ariel;
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 150px;
+  transform: translateY(-50%);
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev {
+  left: 400px;
+}
+
+.next {
+  right: 450px;
+}

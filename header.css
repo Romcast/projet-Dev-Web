@@ -1,0 +1,49 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+nav.title{
+    background-color: #eaccc5;
+    text-align: center;
+    font-family: Consolas, monaco, monospace;
+    border: thick double black;
+
+}
+.menu {
+    position: relative;
+    display: inline-block;
+    margin-top: 6px;
+    margin-left:10px;
+    
+  }
+  .titre {
+    margin: 0;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+.categories {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+    z-index: 1;
+  }
+  
+  .categories li {
+    padding: 10px;
+  }
+  
+  .categories li:last-child {
+    border-bottom: none;
+  }
+  
+  .menu:hover .categories {
+    display: block;
+  }
+  #barre{
+    width:20%;
+}

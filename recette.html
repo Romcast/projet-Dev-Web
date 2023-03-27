@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        
+        <link href="recette.css" rel="stylesheet" type="text/css">
+        <link href="header.html" rel="import">
+    </head>
+
+    <body>
+        
+        <?php 
+        $nom = $_POST['nom'];
+        $nombre = $_POST['nb_personnes'];
+        $difficulte = $ POST['difficulte'];
+        $etapes = $POST['etapes'];
+        $ingredients = $POST['ingredients'];
+        
+        $conseil = $POST['conseils'];
+
+        $html = '<h1>' . $titre . '</h1>';
+        $html .= '<p><strong>Nombre de personnes:</strong> ' . $nombre . '</p>';
+        $html .= '<p><strong>Difficulté:</strong> ' . $difficulte . '</p>';
+
+        $html .= '<h2>Ingrédients:</h2>';
+        $html .= '<ul>';
+        foreach ($ingredients as $ingredient) {
+            $html .= '<li>' . $ingredient . '</li>';
+        }
+        $html .= '</ul>';
+
+        $html .= '<h2>Instructions:</h2>';
+        $html .= '<ol>';
+        foreach ($etapes as $etape) {
+            $html .= '<li>' . $etape . '</li>';
+        }
+        $html .= '</ol>';
+        $html .= '<h2>Derniers conseils:</h2>';
+        $html .= '<p> $conseil</p>'
+
+    echo $html;
+
+        ?>
+    </body>
+</html>
+

@@ -1,0 +1,14 @@
+.titre{
+    background-color: #eaccc5;
+    text-align: center;
+    font-family: Consolas, monaco, monospace;
+    border: thick double black;
+
+}
+body{
+    font-family: Consolas, monaco, monospace;
+}
+.text{
+    width: 100%; 
+    height: 300px;
+}

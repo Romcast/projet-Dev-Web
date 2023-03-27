@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="nouvellerecette.css" rel="stylesheet" type="text/css">
+        <title>Nouvelle recette</title>
+    </head>
+    <body>
+        <h1 class="titre"> Nouvelle recette</h1>
+        <form action="recette.html" method="post">
+            <label>Nom de la recette</label><br><br>
+            <input type="text" id="nom" name="nom"><br>
+            <label>Type de recette</label><br><br>
+            <select id="type" name="type">
+                <option>--------------</option>
+                <option>Entrée</option>
+                <option>Plat</option>
+                <option>Dessert</option>
+            </select><br>
+            <label>Nombre de personne</label><br><br>
+            <input type="number" id="nb_personnes" name="nb_personnes"><br>
+            <label>Difficulté</label><br><br>
+            <select id="difficulte" name="difficulte">
+                <option>--------------</option>
+                <option>Facile</option>
+                <option>Moyenne</option>
+                <option>Difficile</option>
+            </select><br>
+            <label>Phases techniques</label><br><br>
+		    <textarea id="etapes" name="etapes" class="text"></textarea><br>
+            <label>Ingrédients</label><br><br>
+		    <textarea id="ingredients" name="ingredients" class="text"></textarea><br>
+            <label>Dernier conseils du chef</label><br><br>
+		    <textarea id="conseils" name="conseils" class="text"></textarea><br>
+            <input type="submit" value="Enregistrer la recette"><br><br>
+
+        </form>
+    </body>
+</html>
+
