@@ -5,8 +5,8 @@ $username = "root";
 $password = "";
 $name = "projet";
 
-$email = $_POST["email"];
-$mdp = $_POST["password"];
+$email = $_GET["email"];
+$mdp = $_GET["password"];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$name);
@@ -16,9 +16,25 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 };
 
-$conn->query("INSERT INTO utilisateur VALUES ('$email','$mdp')");
+$sql = "SELECT * FROM utilisateur";
+$result = $conn->query($sql);
+$erreur = false;
+
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    if ($row["email"] == $email){
+      $erreur = true;
+    }
+  }
+}
+
+if ($erreur){
+  echo $erreur;
+}
+else{
+  $conn->query("INSERT INTO utilisateur VALUES ('$email','$mdp')");
+}
+
 $conn->close();
-header("Location:connexion.html");
 
 ?>
-

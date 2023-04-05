@@ -8,18 +8,42 @@
     </head>
     <body>
         <div id="d1">
-        <form action="nvcompte.php" method="post">
+        <form>
             <h1 class="titre">Inscription</h1>
             <div class="utilisateur">
-                <input type="email" name="email" placeholder="Email" /><br><br>
-                <input type="password" name="password" placeholder="Mot de passe"><br><br>
+                <input type="email" id="email" name="email" placeholder="Email" /> <div id="err"></div> <br><br>
+                <input type="password" id="password" name="password" placeholder="Mot de passe"><br><br>
                 <div class="bouton">
-                    <button type="submit">S'inscrire</button>
+                    <button type="button" onclick="f()">S'inscrire</button>
                    </div>
             </div>
         </form>
         </br>
         </div>
+
+        <script>
+            function f() {
+                var xhttp = new XMLHttpRequest();
+              
+            xhttp.onreadystatechange=function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.response){
+                        document.getElementById("err").innerHTML = "Email déjà utilisé";
+                    }
+                    else{
+                        window.location = "connexion.html";
+                    }
+                    
+                }
+              };
+              var email=document.getElementById('email').value;
+              var password=document.getElementById('password').value;
+              xhttp.open("POST", "nvcompte.php?email=" + email +"&password=" + password, true);
+              xhttp.send();
+            }
+            </script>
+
+
     </body>
 
 </html>
