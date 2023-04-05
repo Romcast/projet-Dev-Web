@@ -2,39 +2,62 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="nouvellerecette.css" rel="stylesheet" type="text/css">
+        
+
         <title>Nouvelle recette</title>
     </head>
     <body>
         <h1 class="titre"> Nouvelle recette</h1>
-        <form action="recette.html" method="post">
-            <label>Nom de la recette</label><br><br>
-            <input type="text" id="nom" name="nom"><br>
-            <label>Type de recette</label><br><br>
+        <form action="recette.html" method="post" enctype="multipart/form-data">
+            <label>Auteur de la recette</label><br>
+            <input type="text" id="auteur" name="auteur"><br><br>
+            <label>Nom de la recette</label><br>
+            <input type="text" id="nom" name="nom"><br><br>
+            <label>Type de recette</label><br>
             <select id="type" name="type">
                 <option>--------------</option>
                 <option>Entrée</option>
                 <option>Plat</option>
                 <option>Dessert</option>
-            </select><br>
-            <label>Nombre de personne</label><br><br>
-            <input type="number" id="nb_personnes" name="nb_personnes"><br>
-            <label>Difficulté</label><br><br>
+            </select><br><br>
+            <label>Nombre de personne</label><br>
+            <input type="number" id="nb_personnes" name="nb_personnes"><br><br>
+            <label>Difficulté</label><br>
             <select id="difficulte" name="difficulte">
                 <option>--------------</option>
                 <option>Facile</option>
                 <option>Moyenne</option>
                 <option>Difficile</option>
-            </select><br>
-            <label>Phases techniques</label><br><br>
-		    <textarea id="etapes" name="etapes" class="text"></textarea><br>
-            <label>Ingrédients</label><br><br>
-		    <textarea id="ingredients" name="ingredients" class="text"></textarea><br>
-            <label>Dernier conseils du chef</label><br><br>
-		    <textarea id="conseils" name="conseils" class="text"></textarea><br>
+            </select><br><br>
+            <label>Ingrédients:</label><br>
+            <ul id="ingredients">
+                <!-- La liste des ingrédients sera ajoutée ici -->
+            </ul>
+            <input type="text" id="nouvel_ingredient" name="nouvel_ingredient">
+            <button id="ajouter_ingredient" type="button">Ajouter ingrédient</button>
+            <button id="supprimer_dernier_ingredient">Supprimer dernier ingrédient</button><br><br>
+
+            <label>Phases techniques</label><br>
+		    <!-- <textarea id="etapes" name="etapes" class="text"></textarea> -->
+            <ul id="etapes">
+                <!-- La liste des ingrédients sera ajoutée ici -->
+            </ul>
+            <input type="text" id="nouvelle_etape" name="nouvelle_ingredient">
+            <button id="ajouter_etape" type="button">Ajouter étape</button>
+            <button id="supprimer_derniere_etape">Supprimer dernière étape</button><br><br>
+
+            <label>Dernier conseils du chef</label><br>
+		    <textarea id="conseils" name="conseils" class="text"></textarea><br><br>
+            <label> photo (jpeg/png)</label><br>
+            <input type="file" id="photo" name="photo" accept="image/jpeg, image/png"><br><br>
             <input type="submit" value="Enregistrer la recette"><br><br>
+            
+
+            
 
         </form>
+
+        <script src="nouvellerecette.js"></script>
     </body>
 </html>
 
