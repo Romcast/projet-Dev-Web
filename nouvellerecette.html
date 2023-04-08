@@ -2,15 +2,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <link href="nouvellerecette.css" rel="stylesheet" type="text/css">
 
         <title>Nouvelle recette</title>
     </head>
     <body>
         <h1 class="titre"> Nouvelle recette</h1>
         <form action="recette.html" method="post" enctype="multipart/form-data">
-            <label>Auteur de la recette</label><br>
-            <input type="text" id="auteur" name="auteur"><br><br>
+            <!-- <label>Auteur de la recette</label><br>
+            <input type="text" id="auteur" name="auteur"><br><br> -->
             <label>Nom de la recette</label><br>
             <input type="text" id="nom" name="nom"><br><br>
             <label>Type de recette</label><br>
@@ -31,20 +31,35 @@
             </select><br><br>
             <label>Ingrédients:</label><br>
             <ul id="ingredients">
-                <!-- La liste des ingrédients sera ajoutée ici -->
+                <!-- liste d'ingredient -->
             </ul>
-            <input type="text" id="nouvel_ingredient" name="nouvel_ingredient">
-            <button id="ajouter_ingredient" type="button">Ajouter ingrédient</button>
-            <button id="supprimer_dernier_ingredient">Supprimer dernier ingrédient</button><br><br>
+            <input type="number" id="quantite" name="quantite" placeholder="quantité">
+            <select id="unite" name="unite">
+                <option> </option>
+                <option>L</option>
+                <option>mL</option>
+                <option>cL</option>
+                <option>mg</option>
+                <option>g</option>
+                <option>kg</option>
+                <option>pincée</option>
+                <option>c-à-c</option>
+                <option>c-à-s</option>
+            </select>
+
+            <input type="text" id="nouvel_ingredient" name="nouvel_ingredient" placeholder="ingrédient">
+
+            <button id="ajouter_ingredient" type="button">Ajouter ingrédient</button><br><br>
+            <!-- <button id="supprimer_dernier_ingredient">Supprimer dernier ingrédient</button><br><br> -->
 
             <label>Phases techniques</label><br>
-		    <!-- <textarea id="etapes" name="etapes" class="text"></textarea> -->
+		    
             <ul id="etapes">
-                <!-- La liste des ingrédients sera ajoutée ici -->
+                <!-- liste d'etapes -->
             </ul>
             <input type="text" id="nouvelle_etape" name="nouvelle_ingredient">
-            <button id="ajouter_etape" type="button">Ajouter étape</button>
-            <button id="supprimer_derniere_etape">Supprimer dernière étape</button><br><br>
+            <button id="ajouter_etape" type="button">Ajouter étape</button><br><br>
+            <!-- <button id="supprimer_derniere_etape">Supprimer dernière étape</button><br><br> -->
 
             <label>Dernier conseils du chef</label><br>
 		    <textarea id="conseils" name="conseils" class="text"></textarea><br><br>
