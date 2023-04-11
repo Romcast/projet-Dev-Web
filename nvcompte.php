@@ -1,20 +1,9 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$name = "projet";
+require ('sqlConn.php');
 
 $email = $_GET["email"];
 $mdp = $_GET["password"];
-
-// Create connection
-$conn = new mysqli($servername, $username, $password,$name);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-};
 
 $sql = "SELECT * FROM utilisateur";
 $result = $conn->query($sql);
@@ -32,7 +21,7 @@ if ($erreur){
   echo $erreur;
 }
 else{
-  $conn->query("INSERT INTO utilisateur VALUES ('$email','$mdp')");
+  $conn->query("INSERT INTO utilisateur(email,password) VALUES ('$email','$mdp')");
 }
 
 $conn->close();
