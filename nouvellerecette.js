@@ -46,7 +46,7 @@ boutonAjouterIngredient.addEventListener("click", function() {
   var quantite=champQuantite.value;
   var unite=champUnite.value;
   
-	if (ingredient) {
+	if (ingredient && quantite) {
     var nouvelIngredient=document.createElement("input");
     nouvelIngredient.name="nouvelIngredient[]";
     nouvelIngredient.value=ingredient;
@@ -54,15 +54,13 @@ boutonAjouterIngredient.addEventListener("click", function() {
 
 		var nouvelleQuantite = document.createElement("input");
     nouvelleQuantite.type="number";
-    //nouvelleQuantite.id="quantite";
     nouvelleQuantite.name="nouvelleQuantite[]";
     nouvelleQuantite.value=quantite;
 
     var nouvelleUnite= document.createElement("select");
-    //nouvelleUnite.id="unite";
     nouvelleUnite.name="nouvelleUnite[]";
     nouvelleUnite.value = unite;
-    //nouvelleUnite.setAttribute("data-unite", unite);
+    
 
     var sansUnite=document.createElement("option");
     sansUnite.value=" ";
@@ -191,6 +189,35 @@ boutonAjouterEtape.addEventListener("click", function() {
     listeEtapes.removeChild(retourLigne);
   });
 });
+
+
+
+// function nonVide(){
+//   var caseIngredient=document.getElementById("ingredients").innerHTML;
+//   var caseEtape=document.getElementById("etapes").innerHTML;
+//   if (caseIngredient.trim() ==='' ||  caseEtape.trim() ===''){
+    
+//     alert("Au moins une étape et un ingrédients sont requis");
+//     return false
+//   }
+//   else{
+
+//     return true;
+//   }
+// }
+
+function nonVide(){
+  var caseIngredient=document.getElementById("ingredients").innerHTML;
+  var caseEtape=document.getElementById("etapes").innerHTML;
+  if (caseIngredient.trim() &&  caseEtape.trim() ){
+  
+  }
+  else{
+    alert("Au moins une étape et un ingrédients sont requis");
+    return false;
+   
+  }
+}
 
 // let boutonSupprimerEtape = document.getElementById("supprimer_derniere_etape");
 // boutonSupprimerEtape.addEventListener("click", function(event) {

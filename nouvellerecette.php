@@ -8,22 +8,22 @@
     </head>
     <body>
         <h1 class="titre"> Nouvelle recette</h1>
-        <form action="recette.php" method="post" enctype="multipart/form-data">
+        <form action="recette.php" method="post" enctype="multipart/form-data" >
             <!-- <label>Auteur de la recette</label><br>
             <input type="text" id="auteur" name="auteur"><br><br> -->
             <label>Nom de la recette</label><br>
-            <input type="text" id="nom" name="nom"><br><br>
+            <input type="text" id="nom" name="nom" required><br><br>
             <label>Type de recette</label><br>
-            <select id="type" name="type">
+            <select id="type" name="type" required>
                 <option>--------------</option>
                 <option>Entrée</option>
                 <option>Plat</option>
                 <option>Dessert</option>
             </select><br><br>
             <label>Nombre de personne</label><br>
-            <input type="number" id="nb_personnes" name="nb_personnes"><br><br>
+            <input type="number" id="nb_personnes" name="nb_personnes" required><br><br>
             <label>Difficulté</label><br>
-            <select id="difficulte" name="difficulte">
+            <select id="difficulte" name="difficulte" required>
                 <option>--------------</option>
                 <option>Facile</option>
                 <option>Moyenne</option>
@@ -32,9 +32,9 @@
             <label>Ingrédients:</label><br>
             <div id="ingredients" name="ingredients[]" >
                 
-                <!-- liste d'ingredient -->
+                
             </div><br>
-            <input type="number" id="quantite" name="quantite" placeholder="quantité">
+            <input type="number" id="quantite" name="quantite" placeholder="quantité" >
             <select id="unite" name="unite">
                 <option> </option>
                 <option>L</option>
@@ -56,7 +56,7 @@
             <label>Phases techniques</label><br>
 		    
             <div id="etapes" name="etapes[]">
-                <!-- liste d'etapes -->
+                
             </div><br>
             <input type="text" id="nouvelle_etape" name="nouvelle_etape">
             <button id="ajouter_etape" type="button">Ajouter étape</button><br><br>
@@ -67,7 +67,7 @@
 		    <textarea id="conseils" name="conseils" class="text"></textarea><br><br>
             <label> photo (jpeg/png/jpg)</label><br>
             <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg"><br><br>
-            <input type="submit" value="Enregistrer la recette"><br><br>
+            <button type="submit" onclick="return nonVide()">Enregistrer la recette</button><br><br>
             
 
             

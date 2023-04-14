@@ -17,21 +17,17 @@
 
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0)
         {
-        // Testons si le fichier n'est pas trop gros
+        
                 if ($_FILES['photo']['size'] <= 1000000)
                 {
                     $nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
                     $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
             
-                    // Traitement de l'image (ex: enregistrement sur le serveur)
                     if(move_uploaded_file($chemin_fichier, 'image/' . $nom_fichier)) {
-                    // Le fichier a été enregistré avec succès
                             $photo = 'image/' . $nom_fichier;
                             
                     } 
                     else {
-                    // Une erreur s'est produite lors de l'enregistrement du fichier
-            
                     $photo = 'erreur deplacement';
                     }      
                 }
@@ -40,13 +36,9 @@
                 }
         }
         else{
-            echo "introuvable";
+            echo " photo introuvable; ";
         }
         
-
-        
-               
-
 
 
         $html = '<h1>' . $nom . '</h1>';
@@ -79,7 +71,7 @@
         $html .= '<p>' . $conseil . '</p>';
 
         //print_r($nouvelleEtape);
-        //echo $html;
+        //echo strip_tags($html);
         //header("Location:merciRecette.html");
 
         //afficher la photo
@@ -123,23 +115,65 @@
         $dbco = new PDO("mysql:host=$serveur;dbname=$dbname",$user,$pass);
         $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        //On crée une table form
-        $form = "CREATE TABLE IF NOT EXISTS form_recette(
+        //On crée une table form_recette
+        $form_recette = "CREATE TABLE IF NOT EXISTS form_recette(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
             nom VARCHAR(50) NOT NULL,
             auteur VARCHAR(50) NOT NULL,
             type_repas VARCHAR(20) NOT NULL,
             nombre_personnes INT NOT NULL,
             difficulte VARCHAR(20) NOT NULL,
-            conseils VARCHAR(500))";
-        $dbco->exec($form);
-        echo "  la table a ete cree";
-        $entree="INSERT INTO form_recette(id, nom, auteur, type_repas, nombre_personnes, difficulte, conseils)
-        VALUES( 1,'$nom', 'fkf' ,'$type', $nombre, '$difficulte', '$conseil')";
+            conseils VARCHAR(500)  )";
+        $dbco->exec($form_recette);
+        echo "  la table recette a ete cree; ";
+        $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils)
+        VALUES('$nom', 'fkf' ,'$type', $nombre, '$difficulte', '$conseil')";
         
-        $dbco->exec($entree);
-        echo "entrée effectuée";
+        $dbco->exec($entree_recette);
+        echo " recette ajoutée";
+
+        $form_ingredient=  "CREATE TABLE IF NOT EXISTS form_ingredient(
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            nom VARCHAR(50) NOT NULL,
+            quantite INT NOT NULL,
+            unite VARCHAR(10) ,
+            cout INT,
+            recette_id iNT UNSIGNED,
+            FOREIGN KEY(id) REFERENCES form_recette(id) ON DELETE CASCADE
+            )";
+        $dbco->exec($form_ingredient);
+        echo " la table ingredient a ete cree; ";
+
+        for ($i=0; $i<$size_ing; $i++){
+            $quantite=  $nouvelleQuantite[$i] ;
+            $ingredient= $nouvelIngredient[$i];
+            $unite= $nouvelleUnite[$i];
+            $entree_ingredient="INSERT INTO form_ingredient( nom, quantite, unite, cout, recette_id)
+            VALUES('$ingredient', $quantite ,'$unite', NULL,10 )";
+            $dbco->exec($entree_ingredient);
+            echo 'ingredient '. $i+1 .' enregistré ';
+        }
+
+        $form_etape=  "CREATE TABLE IF NOT EXISTS form_etape(
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+            etape VARCHAR(200),
+            recette_id iNT UNSIGNED,
+            FOREIGN KEY(id) REFERENCES form_recette(id) ON DELETE CASCADE
+            )";
+        $dbco->exec($form_etape);
+        echo " la table etape a ete cree; ";
+
+
+        foreach ($nouvelleEtape as $etape ){
+            $entree_etape="INSERT INTO form_etape( etape, recette_id)
+            VALUES('$etape', 11 )";
+            $dbco->exec($entree_etape);
+            echo 'etape '. $i .' enregistré ';
+        
+        
+        }
     }
+
         
         
     catch(PDOException $e){
