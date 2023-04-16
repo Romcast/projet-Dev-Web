@@ -15,29 +15,7 @@
         $conseil = $_POST['conseils'];
 
 
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0)
-        {
         
-                if ($_FILES['photo']['size'] <= 1000000)
-                {
-                    $nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
-                    $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
-            
-                    if(move_uploaded_file($chemin_fichier, 'image/' . $nom_fichier)) {
-                            $photo = 'image/' . $nom_fichier;
-                            
-                    } 
-                    else {
-                    $photo = 'erreur deplacement';
-                    }      
-                }
-                else{
-                    echo "erreur taille";
-                }
-        }
-        else{
-            echo " photo introuvable; ";
-        }
         
 
 
@@ -123,14 +101,47 @@
             type_repas VARCHAR(20) NOT NULL,
             nombre_personnes INT NOT NULL,
             difficulte VARCHAR(20) NOT NULL,
-            conseils VARCHAR(500)  )";
+            conseils VARCHAR(500),
+            photo VARCHAR(20),
+            traitement VARCHAR(500) NOT NULL,
+            note FLOAT  )";
+            
         $dbco->exec($form_recette);
         echo "  la table recette a ete cree; ";
-        $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils)
-        VALUES('$nom', 'fkf' ,'$type', $nombre, '$difficulte', '$conseil')";
+        $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils,traitement)
+        VALUES('$nom', 'fkf' ,'$type', $nombre, '$difficulte', '$conseil','Non traitée')";
         
         $dbco->exec($entree_recette);
-        echo " recette ajoutée";
+        echo " recette ajoutée ";
+        $id_recette=$dbco->lastInsertId();
+        
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0)
+        {
+        
+                if ($_FILES['photo']['size'] <= 1000000)
+                {
+                    //$nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
+                    $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
+            
+                    if(move_uploaded_file($chemin_fichier, 'image/' . $id_recette)) {
+                            $photo = 'image/' . $id_recette;
+                            echo 'voici le chemin de la photo: '.$photo;
+                            
+                    } 
+                    else {
+                    $photo = 'erreur deplacement';
+                    }      
+                }
+                else{
+                    echo "erreur taille";
+                }
+        }
+        else{
+            echo " photo introuvable; ";
+        }
+
+        $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $id_recette;";
+        $dbco->exec($ajout_photo_bdd);
 
         $form_ingredient=  "CREATE TABLE IF NOT EXISTS form_ingredient(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -149,7 +160,7 @@
             $ingredient= $nouvelIngredient[$i];
             $unite= $nouvelleUnite[$i];
             $entree_ingredient="INSERT INTO form_ingredient( nom, quantite, unite, cout, recette_id)
-            VALUES('$ingredient', $quantite ,'$unite', NULL,10 )";
+            VALUES('$ingredient', $quantite ,'$unite', NULL,$id_recette)";
             $dbco->exec($entree_ingredient);
             echo 'ingredient '. $i+1 .' enregistré ';
         }
@@ -166,12 +177,13 @@
 
         foreach ($nouvelleEtape as $etape ){
             $entree_etape="INSERT INTO form_etape( etape, recette_id)
-            VALUES('$etape', 11 )";
+            VALUES('$etape', $id_recette )";
             $dbco->exec($entree_etape);
             echo 'etape '. $i .' enregistré ';
         
         
         }
+        
     }
 
         
@@ -180,4 +192,7 @@
         echo 'Erreur : '.$e->getMessage();
     }
     $dbco= null;
-        ?>
+
+    
+    ?>
+    
