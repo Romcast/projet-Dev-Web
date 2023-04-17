@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$name = "projet";
+$name = "miam";
 
 
 
@@ -15,4 +15,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 };
 
+$utilisateur = "CREATE TABLE IF NOT EXISTS utilisateur(
+  email VARCHAR(100) PRIMARY KEY,
+  password VARCHAR(30),
+  nom VARCHAR(50) DEFAULT '',
+  prenom VARCHAR(50) DEFAULT '',
+  image VARCHAR(50) DEFAULT 'image/utilisateur.png',
+  administrateur INTEGER DEFAULT 0
+  )";
+
+$conn->query($utilisateur);
 ?>
