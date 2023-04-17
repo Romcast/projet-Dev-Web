@@ -47,3 +47,14 @@ nav.title{
   #barre{
     width:20%;
 }
+.profil{
+  display: block;
+  text-align: right;
+  color: black;
+  padding-right: 25px;
+}
+
+img{
+  vertical-align: middle;
+
+}

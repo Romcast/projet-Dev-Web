@@ -1,10 +1,10 @@
+<?php include('header.php') ?>
 <?php 
-session_start(); 
 if (isset($_SESSION['email'])){
 }
 
 else{
-    header("Location:connexion.html");
+    header("Location:connexion.php");
 }
 ?>
 
