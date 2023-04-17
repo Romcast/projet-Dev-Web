@@ -14,12 +14,12 @@ if ($utilisateur->num_rows > 0) {
   while($row = $utilisateur->fetch_assoc()) {
     if ($row["email"] == $email && $row["password"] == $mdp){
       $erreur = false;
-      $_SESSION['time']=time();
       $_SESSION['email']=$email;
       $_SESSION['password']=$row['password'];
       $_SESSION['nom']=$row['nom'];
       $_SESSION['prenom']=$row['prenom'];
       $_SESSION['image']=$row['image'];
+      $_SESSION['administrateur']=$row['administrateur'];
     }
   }
 }
