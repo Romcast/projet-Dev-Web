@@ -16,7 +16,8 @@ if ($conn->connect_error) {
 };
 
 $utilisateur = "CREATE TABLE IF NOT EXISTS utilisateur(
-  email VARCHAR(100) PRIMARY KEY,
+  id_user INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  email VARCHAR(100),
   password VARCHAR(30),
   nom VARCHAR(50) DEFAULT '',
   prenom VARCHAR(50) DEFAULT '',

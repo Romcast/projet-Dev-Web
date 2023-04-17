@@ -50,10 +50,13 @@ else{
               
             xhttp.onreadystatechange=function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    if (this.response){
+                    if (this.response==2){
                         document.getElementById("err").innerHTML = "Mot de passe incorrect !";
                     }
-                    else{
+                    if (this.response==1){
+                        document.getElementById("err").innerHTML = "Email déjà utilisé !";
+                    }
+                    if (this.response==0){
                         window.location = "profil.php";
                     }
                     

@@ -1,14 +1,14 @@
 <?php
 require ('sqlConn.php');
 session_start();
-$email = $_SESSION['email'];
+$id_user = $_SESSION['id_user'];
 
 if ($_FILES["file"]["name"] == ""){
     $image = "image/utilisateur.png";
     if (basename($_SESSION['image']) !== "utilisateur.png"){
         unlink($_SESSION['image']);
     }
-    $conn->query("UPDATE utilisateur SET image = '$image' WHERE email = '$email' ");
+    $conn->query("UPDATE utilisateur SET image = '$image' WHERE id_user = '$id_user' ");
     $_SESSION['image']=$image;
     $conn->close();
     header("Location:changeProfil.php");
@@ -17,6 +17,7 @@ $target_dir = "image/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$target_file = $target_dir . $_SESSION['id_user'] . '.' . $imageFileType;
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
@@ -43,7 +44,7 @@ if ($uploadOk == 0) {
     if (basename($_SESSION['image']) !== "utilisateur.png"){
         unlink($_SESSION['image']);
     }
-    $conn->query("UPDATE utilisateur SET image = '$target_file' WHERE email = '$email' ");
+    $conn->query("UPDATE utilisateur SET image = '$target_file' WHERE id_user = '$id_user' ");
     $_SESSION['image']=$target_file;
     $conn->close();
     header("Location:changeProfil.php");
