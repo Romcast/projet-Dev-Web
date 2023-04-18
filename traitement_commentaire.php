@@ -17,10 +17,12 @@ $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try{
     //On crée une table commentaire
     $commentaire = "CREATE TABLE IF NOT EXISTS commentaire(
-        page_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        nom VARCHAR(50) NOT NULL,
+        commentaire_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
+        mail_auteur VARCHAR(50) NOT NULL,
         commentaire VARCHAR(5000),
-        note INT
+        note INT,
+        recette_id iNT UNSIGNED,
+        FOREIGN KEY(recette_id) REFERENCES form_recette(id) ON DELETE CASCADE
         )";
     if($dbco->exec($commentaire)==true){
         echo "la table commentaire a bien été créée; ";
@@ -30,7 +32,7 @@ try{
     }
     
     // Insérer le commentaire dans la base de données avec l'ID de la page
-    $query = "INSERT INTO commentaire (nom, commentaire, note) VALUES ( '$username', '$comment', $note)";
+    $query = "INSERT INTO commentaire (mail_auteur, commentaire, note) VALUES ( '$username', '$comment', $note)";
     if($dbco->exec($query)==true){
         echo "la requete a bien été exécutée; ";
     }
