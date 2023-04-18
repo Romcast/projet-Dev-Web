@@ -39,6 +39,8 @@ try{
     else{
         echo "une erreur s'est produite lors de la requete; ";
     }
+
+    header("Location: afficher_commentaire.php");
 }
 
 catch(PDOException $e){
