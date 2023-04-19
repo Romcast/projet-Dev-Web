@@ -4,7 +4,7 @@ session_start();
 $id_user = $_SESSION['id_user'];
 
 if ($_FILES["file"]["name"] == ""){
-    $image = "image/utilisateur.png";
+    $image = "imageProfil/utilisateur.png";
     if (basename($_SESSION['image']) !== "utilisateur.png"){
         unlink($_SESSION['image']);
     }
@@ -13,7 +13,7 @@ if ($_FILES["file"]["name"] == ""){
     $conn->close();
     header("Location:changeProfil.php");
 }
-$target_dir = "image/";
+$target_dir = "imageProfil/";
 $target_file = $target_dir . basename($_FILES["file"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

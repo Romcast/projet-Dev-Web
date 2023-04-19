@@ -21,7 +21,7 @@ $utilisateur = "CREATE TABLE IF NOT EXISTS utilisateur(
   password VARCHAR(30),
   nom VARCHAR(50) DEFAULT '',
   prenom VARCHAR(50) DEFAULT '',
-  image VARCHAR(50) DEFAULT 'image/utilisateur.png',
+  image VARCHAR(50) DEFAULT 'imageProfil/utilisateur.png',
   administrateur INTEGER DEFAULT 0
   )";
 
