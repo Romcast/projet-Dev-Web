@@ -28,7 +28,7 @@ else{
             </form>
             <label>Email :</label><br>
             <input type="email" id="email" name="email" placeholder="Email" value= <?php echo $_SESSION['email'] ?> ><br><br>
-            <label>Ancien mot de passe :</label><br>
+            <label>Ancien mot de passe (requis) :</label><br>
             <input type="password" id="old_password" name="old_password" placeholder="Ancien mot de passe"><br><br>
             <label>Nouveau mot de passe :</label><br>
             <input type="password" id="new_password" name="new_password" placeholder="Nouveau mot de passe"><br><br>
