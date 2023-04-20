@@ -96,6 +96,22 @@
             echo "Le prix de cette recette est en cours d'estimation";}
         ?></p>
 
+<?php 
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        $_SESSION['recette_id']=$id;
+        //echo $_SESSION['recette_id'];
+        if (isset($_SESSION['id_user'])){
+
+            require_once("formulaire_commentaires.php");
+        }
+        else{
+            //require_once("connexion.php");
+            require_once("afficher_commentaire.php");
+        }  
+        ?>
+
         <a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a>
         <a href="validerrecette.php?valid=<?php echo $id?>">Valider</a>
         <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a>
