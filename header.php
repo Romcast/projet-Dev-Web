@@ -23,8 +23,6 @@ session_start();
                      <li><a href="desserts.html">Desserts</a></li>
                  </ul>
                 </div>
-                <a href="connexion.php">Connexion</a>
-                <a href="inscription.php">Inscription</a>
                 <a href="classement.php" class="titre">Classement</a>
                 <div id='profil' class='profil'>
                     <?php
@@ -33,15 +31,33 @@ session_start();
                     }
                     else{
                         echo 'non connecté';
+                        echo" ";
+                        echo"<a href=\"connexion.php\">Connexion</a>";
+                        echo" ";
+                        echo"<a href=\"inscription.php\">Inscription</a>";
+                        echo" ";
                     }
+                    if(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==1){
+                        echo "<a href=\"listerecette.php\">Recette à gérer</a>";
+                        echo" ";
+                        echo "<a href=\"liste_ingredient_cout.php\">Mise à jour cout</a>";
+                        echo" ";
+                        echo "<a href=\"listerecetteVALIDE.php\">Recette du site</a>";
+                        echo" ";
+                        //echo "<a href=\"nouvellerecette.php\">Nouvelle Recette</a>";
+                        echo" ";
+                    }elseif(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==0){
+                        echo "<a href=\"nouvellerecette.php\">Nouvelle Recette</a>";
+                    }
+                    
                     ?>
                 </div>
             </br>
         
-                <form action="rechercher" method="get">
-                    <input id="barre" type="text" name="text" placeholder="Cherchez une recette">
+            <form action="barrederecherche2.0.php" method="get">
+                    <input id="rechercher" type="text" name="rechercher" placeholder="Cherchez une recette">
                     <button type="submit">rechercher</button>
-                </form>
+            </form>
             </br>
             </div>
         </nav>
