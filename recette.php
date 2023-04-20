@@ -1,6 +1,6 @@
 <?php 
         // $auteur = $_POST['auteur']; 
-
+        session_start();
         $nom = $_POST['nom'];
         $type= $_POST['type'];
         $nombre = $_POST['nb_personnes'];
@@ -9,6 +9,7 @@
         $nouvelleUnite=$_POST['nouvelleUnite'];
         $nouvelIngredient=$_POST['nouvelIngredient'];
         $nouvelleEtape=$_POST['nouvelleEtape'];
+        $auteur=$_SESSION['email'];
 
         
         
@@ -109,7 +110,7 @@
         $dbco->exec($form_recette);
         echo "  la table recette a ete cree; ";
         $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils,traitement)
-        VALUES('$nom', 'fkf' ,'$type', $nombre, '$difficulte', '$conseil','Non traitée')";
+        VALUES('$nom', '$auteur' ,'$type', $nombre, '$difficulte', '$conseil','Non traitée')";
         
         $dbco->exec($entree_recette);
         echo " recette ajoutée ";
