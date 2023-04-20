@@ -1,7 +1,13 @@
 <?php
 // Récupérer les données du formulaire
 //$page_id = $_POST['page_id'];
-$username = $_POST['username'];
+//$username = $_POST['username'];
+if(!isset($_SESSION)){
+    session_start();
+}
+
+$recette_id=$_SESSION['recette_id'];
+$mail_auteur=$_SESSION['email'];
 $comment = $_POST['comment'];
 $note = $_POST['note'];
 
@@ -32,15 +38,17 @@ try{
     }
     
     // Insérer le commentaire dans la base de données avec l'ID de la page
-    $query = "INSERT INTO commentaire (mail_auteur, commentaire, note) VALUES ( '$username', '$comment', $note)";
+    $query = "INSERT INTO commentaire (mail_auteur, commentaire, note,recette_id) VALUES ( '$mail_auteur', '$comment', $note,$recette_id)";
     if($dbco->exec($query)==true){
         echo "la requete a bien été exécutée; ";
     }
     else{
         echo "une erreur s'est produite lors de la requete; ";
     }
-
-    header("Location: afficher_commentaire.php");
+    if (isset($_GET['id'])) {
+        include_once("visuelrecette.php");
+    }
+    
 }
 
 catch(PDOException $e){
