@@ -4,7 +4,7 @@ require ('sqlConn.php');
 
 $email = $_GET["email"];
 $mdp = $_GET["password"];
-
+$date = date("Y-m-d");
 $sql = "SELECT * FROM utilisateur";
 $result = $conn->query($sql);
 $erreur = false;
@@ -21,7 +21,7 @@ if ($erreur){
   echo $erreur;
 }
 else{
-  $conn->query("INSERT INTO utilisateur(email,password) VALUES ('$email','$mdp')");
+  $conn->query("INSERT INTO utilisateur(email,password,date_creation) VALUES ('$email','$mdp','$date')");
 }
 
 $conn->close();

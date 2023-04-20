@@ -29,6 +29,12 @@ else{
             <label>
                 Prenom : <?php echo $_SESSION['prenom'] ; ?>
             </label><br><br>
+            <label>
+                Note moyenne : <?php echo $_SESSION['note_moy'] ; ?>
+            </label><br><br>
+            <label>
+                Compte créé le : <?php echo $_SESSION['note_moy'] ; ?>
+            </label><br><br>
             <div class="bouton">
             <button onclick="window.location='changeProfil.php'">Modifier</button><br><br>
             <form action="deconnexion.php">

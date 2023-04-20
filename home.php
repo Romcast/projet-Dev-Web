@@ -8,10 +8,9 @@
     </head>
     <body>
         <?php include('header.php') ?>
-        <div>
-            <h1>Utilisateur de la semaine</h1>
         </div>
-        </div>
+        <br>
+        <br>
         <div class="slideshow-container">
             <a href="entree.html">
               <div class="slide">
@@ -54,61 +53,8 @@
 </br>
 </br>
 </br>
-        <section id="recette_moment">
-            
-            <h2>Les recettes du moment</h2>
-            <div class="recette" id="recette1">
-                <img class="plat" src="image/lasagne.jpg" alt="introuvable" >
-                <div class="description_recette"> 
-                    <a href="lasagne.html"> Les lasagnes du chef</a><br>
-                    <p class="texte_recette">;;;;; ;;;;;;;;; ;;;;;;; ;;;; ;;;; ;; ;;; ;;;; ;;;  ;; ;;;; ;;;; ;;;; ;;; ;;;; ;;;;  ;;;;; ;;;; ;;; ;; ;; ;;;;;; ;;;;; ;;;;; ;;; ;;;;;; ;;;; ;;;;; ;;;;; ;;;;; ;;;;;; ;;;;;; ;;;;;; ;;;;;;; ;;;;; ;;;;;  ;;;; ;;;; ;;;;  ;;;; ;;; ;;;;;;; ;;;; ;;;;; ;;;;</p>
-                </div>
-                <div class="user">
-                    <img class="photo_user" src="image/utilisateur.png">
-                    <p>utilisateur</p>   
-                </div>
-                
-            </div>
-
-            <div class="recette" id="recette1">
-                <img class="plat" src="image/lasagne.jpg" alt="introuvable" >
-                <div class="description_recette"> 
-                    <a href="lasagne.html"> Les lasagnes du chef</a><br>
-                    <p class="texte_recette">;;;;; ;;;;;;;;; ;;;;;;; ;;;; ;;;; ;; ;;; ;;;; ;;;  ;; ;;;; ;;;; ;;;; ;;; ;;;; ;;;;  ;;;;; ;;;; ;;; ;; ;; ;;;;;; ;;;;; ;;;;; ;;; ;;;;;; ;;;; ;;;;; ;;;;; ;;;;; ;;;;;; ;;;;;; ;;;;;; ;;;;;;; ;;;;; ;;;;;  ;;;; ;;;; ;;;;  ;;;; ;;; ;;;;;;; ;;;; ;;;;; ;;;;</p>
-                </div>
-                <div class="user">
-                    <img class="photo_user" src="image/utilisateur.png">
-                    <p>utilisateur</p>   
-                </div>
-                
-            </div>
-            <div class="recette" id="recette1">
-                <img class="plat" src="image/lasagne.jpg" alt="introuvable" >
-                <div class="description_recette"> 
-                    <a href="lasagne.html"> Les lasagnes du chef</a><br>
-                    <p class="texte_recette">;;;;; ;;;;;;;;; ;;;;;;; ;;;; ;;;; ;; ;;; ;;;; ;;;  ;; ;;;; ;;;; ;;;; ;;; ;;;; ;;;;  ;;;;; ;;;; ;;; ;; ;; ;;;;;; ;;;;; ;;;;; ;;; ;;;;;; ;;;; ;;;;; ;;;;; ;;;;; ;;;;;; ;;;;;; ;;;;;; ;;;;;;; ;;;;; ;;;;;  ;;;; ;;;; ;;;;  ;;;; ;;; ;;;;;;; ;;;; ;;;;; ;;;;</p>
-                </div>
-                <div class="user">
-                    <img class="photo_user" src="image/utilisateur.png">
-                    <p>utilisateur</p>   
-                </div>
-                
-            </div>
-            <div class="recette" id="recette1">
-                <img class="plat" src="image/lasagne.jpg" alt="introuvable" >
-                <div class="description_recette"> 
-                    <a href="lasagne.html"> Les lasagnes du chef</a><br>
-                    <p class="texte_recette">;;;;; ;;;;;;;;; ;;;;;;; ;;;; ;;;; ;; ;;; ;;;; ;;;  ;; ;;;; ;;;; ;;;; ;;; ;;;; ;;;;  ;;;;; ;;;; ;;; ;; ;; ;;;;;; ;;;;; ;;;;; ;;; ;;;;;; ;;;; ;;;;; ;;;;; ;;;;; ;;;;;; ;;;;;; ;;;;;; ;;;;;;; ;;;;; ;;;;;  ;;;; ;;;; ;;;;  ;;;; ;;; ;;;;;;; ;;;; ;;;;; ;;;;</p>
-                </div>
-                <div class="user">
-                    <img class="photo_user" src="image/utilisateur.png">
-                    <p>utilisateur</p>   
-                </div>
-                
-            </div>
-            
-        </section>
-    </br>
+<?php require('utilSemaineSql.php'); ?>
+</br>
 </br>
 
 

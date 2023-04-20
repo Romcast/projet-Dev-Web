@@ -13,9 +13,8 @@ session_start();
     <body>
         
         <nav class="title">
-            <h1>Miam</h1>
+            <h1 onclick="window.location='home.php'">Miam</h1>
             <div class="onglets">
-                <a href="home.html">Home</a>
                 <div class="menu">
                  <a href="categories.html" class="titre">Catégories</a>
                  <ul class="categories">
@@ -26,13 +25,11 @@ session_start();
                 </div>
                 <a href="connexion.php">Connexion</a>
                 <a href="inscription.php">Inscription</a>
+                <a href="classement.php" class="titre">Classement</a>
                 <div id='profil' class='profil'>
                     <?php
                     if (isset($_SESSION['email'])){
-                        echo '<a href="profil.php" >';
-                        echo '<img id="img1" src='. $_SESSION['image'] . ' alt="Introuvable" width="30" height="30" >';
-                        echo "</a>";
-                        echo $_SESSION['email'];
+                        include('headerProfil.php');
                     }
                     else{
                         echo 'non connecté';

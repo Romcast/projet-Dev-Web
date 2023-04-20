@@ -63,39 +63,58 @@ nav.title{
 }
 
 
-#recette_moment{
+#util_semaine{
   border:120px;
   border-radius:4px;
   padding: 20px;
   padding-top: 15px;
   background-color: antiquewhite;
   margin-left: 4px;
-  width: 98%;
+  width: 95%;
 
 }
 
-.recette{
+.carre_util_semaine{
   width:98%;
-  height:8em;
   margin-left:3px;
   border:2px solid rgb(102, 94, 94);
   border-radius:4px;
   padding: 10px;
-  display:flex;
+  display:inline-block;
   justify-content: space-between;
-  
 
 }
 
-.plat{
+.image_profil{
   height:7.5em;
   width:7.5em;
 }
 
-.description_recette{
+.description_util_semaine{
+  display:inline-block;
   margin:10px;
   width:50%;
-  
+  font-size:20;
+  color:black;
+  vertical-align:top;
+
+}
+
+.miniprofil{
+  display:inline-block;
+}
+
+.infos_util_semaine{
+  font-size:15;
+}
+
+.recette_util_semaine{
+  width:98%;
+  margin-left:3px;
+  border:2px solid rgb(102, 94, 94);
+  border-radius:4px;
+  padding: 10px;
+  display:inline-block;
 
 }
 
@@ -111,16 +130,6 @@ nav.title{
 
 }
 
-.photo_user{
-  padding: 10px;
-  height:5em;
-  width:5em;
-}
-
-.user{
-  margin:auto;
-  
-}
 .slideshow-container {
   position: relative;
 }

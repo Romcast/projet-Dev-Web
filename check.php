@@ -20,7 +20,10 @@ if ($utilisateur->num_rows > 0) {
       $_SESSION['nom']=$row['nom'];
       $_SESSION['prenom']=$row['prenom'];
       $_SESSION['image']=$row['image'];
+      $_SESSION['date_creation']=$row['date_creation'];
       $_SESSION['administrateur']=$row['administrateur'];
+      $_SESSION['ban']=$row['ban'];
+      $_SESSION['note_moy']=$row['note_moy'];
     }
   }
 }

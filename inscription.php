@@ -28,7 +28,7 @@
             xhttp.onreadystatechange=function() {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.response){
-                        document.getElementById("err").innerHTML = "Email déjà utilisé";
+                        document.getElementById("err").innerHTML = "Email incorrect";
                     }
                     else{
                         window.location = "connexion.php";
