@@ -1,4 +1,5 @@
 <?php
+    require('header.php');
     $servername ="localhost";
     $username ="root";
     $password = "";
