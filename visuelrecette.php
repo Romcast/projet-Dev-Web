@@ -1,4 +1,5 @@
 <?php
+    require('header.php');
     $servername ="localhost";
     $username ="root";
     $password = "";
@@ -110,11 +111,14 @@
             //require_once("connexion.php");
             require_once("afficher_commentaire.php");
         }  
+                if(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==1){
+        ?><a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a><?php;?>
+        <a href="validerrecette.php?valid=<?php echo $id?>">Valider</a><?php;?>
+        <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a><?php;?>
+        <?php
+        }
         ?>
-
-        <a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a>
-        <a href="validerrecette.php?valid=<?php echo $id?>">Valider</a>
-        <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a>
+        
 
     </body>
 </html>
