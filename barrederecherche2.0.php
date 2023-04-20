@@ -1,12 +1,15 @@
 <?php
-    $servername ="localhost";
+    require('header.php');
+   $servername ="localhost";
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
     $recette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé"');
     if(isset($_GET['rechercher'])AND !empty($_GET['rechercher'])){
+        include 'header.php';
         $recherche=$_GET['rechercher'];
-        $recette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé" AND nom LIKE "%'.$recherche.'%"' );
+        $recette=$bdd->prepare('SELECT * FROM form_recette WHERE traitement="Validé" AND nom REGEXP :mot_entier' );
+        $recette->execute(array(':mot_entier' => '\b'.$recherche.'\b'));
     };
 
 ?>
@@ -18,39 +21,28 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <form method="GET">
-            <input type="search" name="rechercher" placeholder="Mots-clés">
-            <input type="submit" name="Entrée">
-        </form>
         <section class="afficher">
             <?php
                 if($recette->rowCount()>0){
                     while($r=$recette->fetch()){
                         ?>
                         <p><a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a>
-                        <?php switch($r['note']){
-                            case NULL:
+                        <?php 
+                            if($r['note']==NULL){
                                 echo "pas de note";
-                                break;
-                            case 0:
+                            }elseif(0<=$r['note'] && $r['note']<1){
                                 echo "";
-                                break;
-                            case 1:
+                            }elseif(1<=$r['note'] && $r['note']<2){
                                 echo "*";
-                                break;
-                            case 2:
+                            }elseif(2<=$r['note'] && $r['note']<3){
                                 echo "**";
-                                break;
-                            case 3:
+                            }elseif(3<=$r['note'] && $r['note']<4){
                                 echo "***";
-                                break;
-                            case 4:
+                            }elseif(4<=$r['note'] && $r['note']<5){
                                 echo "****";
-                                break;
-                            case 5:
+                            }else{
                                 echo "*****";
-                                break;
-                        } ;?></p>
+                            };?></p>
                         <?php
                     }
                 }
