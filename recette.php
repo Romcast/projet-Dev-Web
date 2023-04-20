@@ -105,12 +105,13 @@
             conseils VARCHAR(500),
             photo VARCHAR(20),
             traitement VARCHAR(500) NOT NULL,
-            note FLOAT  )";
+            note FLOAT,
+            cout_recette FLOAT NOT NULL )";
             
         $dbco->exec($form_recette);
         echo "  la table recette a ete cree; ";
-        $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils,traitement)
-        VALUES('$nom', '$auteur' ,'$type', $nombre, '$difficulte', '$conseil','Non traitée')";
+        $entree_recette="INSERT INTO form_recette( nom, auteur, type_repas, nombre_personnes, difficulte, conseils,traitement,cout_recette)
+        VALUES('$nom', '$auteur' ,'$type', $nombre, '$difficulte', '$conseil','Non traitée',0)";
         
         $dbco->exec($entree_recette);
         echo " recette ajoutée ";
@@ -160,9 +161,32 @@
             $quantite=  $nouvelleQuantite[$i] ;
             $ingredient= $nouvelIngredient[$i];
             $unite= $nouvelleUnite[$i];
+            //On verifie si un ingredient similaire est deja dans la table
+            $ingredient_existe=$dbco->prepare('SELECT * FROM form_ingredient WHERE nom=? AND unite=? AND cout IS NOT NULL LIMIT 1 ');
+            $ingredient_existe->execute(array($ingredient,$unite));
+            //
             $entree_ingredient="INSERT INTO form_ingredient( nom, quantite, unite, cout, recette_id)
             VALUES('$ingredient', $quantite ,'$unite', NULL,$id_recette)";
             $dbco->exec($entree_ingredient);
+             $ingredient_id = $dbco->lastInsertId();
+            if($ingredient_existe->rowCount()==1){
+                //si l'ingredient existe dans la table on recupere son prix pour mettre a jour le prix du nouvel ingredient inseré dans la table
+                $ingredient_existe=$ingredient_existe->fetch();
+                $update_cout=$dbco->prepare('UPDATE form_ingredient SET cout=? WHERE id=?');
+                $update_cout->execute(array($ingredient_existe['cout'],$ingredient_id));
+               //on met egalement a jour le prix de la recette
+                $recette=$dbco->prepare('SELECT * FROM form_recette WHERE id=?');
+                $recette->execute(array($id_recette));
+
+                if($recette->rowCount()==1){
+                    $recette=$recette->fetch();
+                    $cout_recette=$recette['cout_recette']+$quantite*$ingredient_existe['cout'];
+                    $update_cout_recette=$dbco->prepare('UPDATE form_recette SET cout_recette=? WHERE id=?');
+                    $update_cout_recette->execute(array($cout_recette,$id_recette));
+                }
+               
+            }
+            //
             echo 'ingredient '. $i+1 .' enregistré ';
         }
 
