@@ -85,10 +85,6 @@ nav.title{
 
 }
 
-.image_profil{
-  height:7.5em;
-  width:7.5em;
-}
 
 .description_util_semaine{
   display:inline-block;
@@ -102,6 +98,10 @@ nav.title{
 
 .miniprofil{
   display:inline-block;
+}
+
+.tab{
+  margin-left:40px;
 }
 
 .infos_util_semaine{
