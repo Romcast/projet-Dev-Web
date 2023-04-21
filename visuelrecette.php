@@ -22,6 +22,8 @@
             $conseil=$vrecette['conseils'];
             $image=$vrecette['photo'];
             $cout=$vrecette['cout_recette'];
+            //
+            $traitement=$vrecette['traitement'];
             
         }else{
             die('Cet recette n\'existe pas');
@@ -36,10 +38,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>NOUVELLE RECETTE</title>
+        <title> RECETTE : <?php echo $titre;?> </title>
     </head>
     <body>
-        <h1> RECETTE A TRAITER :<?php echo $titre;?> </h1>
+        <h1> RECETTE :<?php echo $titre;?> </h1>
         <h3>envoyée par <?php echo $auteur;?></h3>
         
         <p>Type: <?php echo $type;?></p>
@@ -112,11 +114,15 @@
             require_once("afficher_commentaire.php");
         }  
                 if(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==1){
-        ?><a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a><?php;?>
-        <a href="validerrecette.php?valid=<?php echo $id?>">Valider</a><?php;?>
-        <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a><?php;?>
-        <?php
-        }
+                    if($traitement=="Validé"){?>
+                        <a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a><?php;?>
+                        <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a><?php
+                    }else{?>
+                        <a href="validerrecette.php?valid=<?php echo $id?>">Valider</a><?php;?>
+                        <a href="deleterecette.php?delete=<?php echo $id?>">Supprimer</a><?php;?>
+                        <a href="modifrecette.php?modif=<?php echo $id?>">Modifier</a><?php
+                    }
+                }
         ?>
         
 
