@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h2>Recette de l'utilisateur</h2>
+    <h2>Recettes de l'utilisateur</h2>
     
     <select id="choix" size="1" onchange="f()">
         <option>--------</option>
