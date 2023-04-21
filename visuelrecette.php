@@ -16,6 +16,7 @@
             $vrecette=$vrecette->fetch();
             $titre=$vrecette['nom'];
             $auteur=$vrecette['auteur'];
+            $note=number_format($vrecette['note'],2);//2 CS
             $type=$vrecette['type_repas'];
             $nbpersonne=$vrecette['nombre_personnes'];
             $difficulte=$vrecette['difficulte'];
@@ -61,9 +62,9 @@
                         echo $i['nom'];
                         if($i['cout']==""){
                             $encours_d_estimation=1;
-                            echo "prix à estimer";
+                            echo " prix à estimer";
                         }else{
-                            echo "prix estimé :".$i['cout']."par".$i['unite'];
+                            echo " prix estimé :".$i['cout']."par".$i['unite'];
                         }
                         ?></p><?php
                     }
@@ -98,6 +99,8 @@
         }else{
             echo "Le prix de cette recette est en cours d'estimation";}
         ?></p>
+        <h4> Note de l'utilisateur:</h4>
+        <p> <?php echo $note."/5" ?>
 
 <?php 
         if(!isset($_SESSION)){
