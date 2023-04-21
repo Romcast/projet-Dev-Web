@@ -208,7 +208,7 @@
         
         
         }
-        
+        header("Location:home.php?message=creationsuccess");
     }
 
         
