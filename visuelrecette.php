@@ -99,7 +99,7 @@
         }else{
             echo "Le prix de cette recette est en cours d'estimation";}
         ?></p>
-        <h4> Note de l'utilisateur:</h4>
+        <h4> Note de la recette:</h4>
         <p> <?php echo $note."/5" ?>
 
 <?php 
@@ -107,13 +107,27 @@
             session_start();
         }
         $_SESSION['recette_id']=$id;
-        //echo $_SESSION['recette_id'];
-        if (isset($_SESSION['id_user'])){
-
-            require_once("formulaire_commentaires.php");
+        if (isset($_SESSION['id_user'],$_SESSION['email'],$_SESSION['recette_id'])){
+            $verif_comm=$bdd->prepare("SELECT COUNT(*) FROM commentaire WHERE mail_auteur=? AND recette_id=?");
+            $verif_comm->execute(array($_SESSION['email'],$_SESSION['recette_id']));
+            $nb_comm = $verif_comm->fetchColumn();
+            if($nb_comm>0){
+                require_once("afficher_commentaire.php");
+                echo ' vous avez déja commenté.'. '<br>';
+                echo "Nom de la session : " . session_name() . "<br>";
+                foreach($_SESSION as $key => $value) {
+                    echo "Variable de session : " . $key . " = " . $value . "<br>";
+}
+            }
+            else{
+                require_once("formulaire_commentaires.php");
+                
+            }
+            
         }
+            
+
         else{
-            //require_once("connexion.php");
             require_once("afficher_commentaire.php");
         }  
                 if(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==1){
