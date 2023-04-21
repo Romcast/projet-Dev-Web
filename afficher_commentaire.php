@@ -14,7 +14,7 @@
             $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             try{
                 if (isset($_GET['id'])) {
-                    $statement=$dbco->prepare("SELECT mail_auteur,commentaire,note FROM commentaire WHERE recette_id=$recette_id");//id est defini dans visuelrecette.php
+                    $statement=$dbco->prepare("SELECT mail_auteur,commentaire,note FROM commentaire WHERE recette_id=$recette_id");
                     $statement->execute();
                     $commentaires=$statement->fetchAll(PDO::FETCH_ASSOC);
                     echo '<div>' . '<div class="ligne">' . '<div >' . 'auteur'. '</div>'.'<div>'. 'commentaire'.'</div>' . '<div >' . 'note' .'</div>'. '</div>'. '</div>';
