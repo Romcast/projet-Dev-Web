@@ -49,13 +49,27 @@ try{
     $moyenne_note_query = $dbco->query("SELECT AVG(note) FROM commentaire WHERE recette_id = $recette_id");
     $moyenne_note = $moyenne_note_query->fetchColumn();
     $update_note = "UPDATE form_recette SET note = $moyenne_note WHERE id = $recette_id";
+
     if($dbco->exec($update_note)){
         echo "note ";
     }
     else{
         echo "erreur note";
     }
+
+    $auteur_query =$dbco->query("SELECT auteur FROM form_recette WHERE id = $recette_id");
+    $auteur = $auteur_query->fetchColumn();
+    $moyenne_note_query_user = $dbco->query("SELECT AVG(note) FROM form_recette WHERE auteur = '$auteur'");
+    $moyenne_note_user = $moyenne_note_query_user->fetchColumn();
+    $update_note_user = "UPDATE utilisateur SET note_moy = $moyenne_note_user WHERE email = '$auteur'";
     
+    if($dbco->exec($update_note_user)){
+        echo "note user ";
+    }
+    else{
+        echo "erreur note user";
+    }
+
     if (isset($_GET['id'])) {
         include_once("visuelrecette.php");
     }
