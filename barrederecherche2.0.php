@@ -6,7 +6,6 @@
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
     $recette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé"');
     if(isset($_GET['rechercher'])AND !empty($_GET['rechercher'])){
-        include 'header.php';
         $recherche=$_GET['rechercher'];
         $recette=$bdd->prepare('SELECT * FROM form_recette WHERE traitement="Validé" AND nom REGEXP :mot_entier' );
         $recette->execute(array(':mot_entier' => '\b'.$recherche.'\b'));
