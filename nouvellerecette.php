@@ -21,7 +21,7 @@
                 <option>Dessert</option>
             </select><br><br>
             <label>Nombre de personne</label><br>
-            <input type="number" id="nb_personnes" name="nb_personnes" required><br><br>
+            <input type="number" id="nb_personnes" min="1" name="nb_personnes" required><br><br>
             <label>Difficulté</label><br>
             <select id="difficulte" name="difficulte" required>
                 <option>--------------</option>
@@ -34,7 +34,7 @@
                 
                 
             </div><br>
-            <input type="number" id="quantite" name="quantite" placeholder="quantité" >
+            <input type="number" id="quantite" min="1" name="quantite" placeholder="quantité" >
             <select id="unite" name="unite">
                 <option> </option>
                 <option>L</option>
