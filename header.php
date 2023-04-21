@@ -11,7 +11,11 @@ session_start();
     </head>
 
     <body>
-        
+        <?php
+        if(isset($_GET['message']) && $_GET['message'] == 'creationsuccess'){
+            echo "Votre recette a été crée avec succès !";
+         }
+       ?> 
         <nav class="title">
             <h1 onclick="window.location='home.php'">Miam</h1>
             <div class="onglets">
