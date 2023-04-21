@@ -45,6 +45,17 @@ try{
     else{
         echo "une erreur s'est produite lors de la requete; ";
     }
+
+    $moyenne_note_query = $dbco->query("SELECT AVG(note) FROM commentaire WHERE recette_id = $recette_id");
+    $moyenne_note = $moyenne_note_query->fetchColumn();
+    $update_note = "UPDATE form_recette SET note = $moyenne_note WHERE id = $recette_id";
+    if($dbco->exec($update_note)){
+        echo "note ";
+    }
+    else{
+        echo "erreur note";
+    }
+    
     if (isset($_GET['id'])) {
         include_once("visuelrecette.php");
     }
