@@ -1,7 +1,7 @@
 <section id="util_semaine">
             
             <h2>Utilisateur de la semaine !!</h2>
-            <a href="visuelProfil.php?email=<?php echo $email ?>">
+            <a href="visuelProfil.php?id_user=<?php echo $id_user ?>">
             <div class="carre_util_semaine">
                 <div class="miniprofil">
                 <img class="image_profil" src= <?php echo $image ?> alt="introuvable" width="100" height="100" >

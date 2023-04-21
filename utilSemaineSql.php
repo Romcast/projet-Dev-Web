@@ -3,6 +3,7 @@ require('sqlConn.php');
 $user = $conn->query("SELECT * FROM utilisateur WHERE util_semaine = 1");
 if ($user->num_rows > 0) {
     $row = $user->fetch_assoc();
+    $id_user = $row['id_user'];
     $email = $row['email'];
     $nom = $row['nom'];
     $prenom = $row['prenom'];

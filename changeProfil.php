@@ -57,11 +57,12 @@ else{
                         document.getElementById("err").innerHTML = "Email déjà utilisé !";
                     }
                     if (this.response==0){
-                        window.location = "profil.php";
+                        window.location = profil;
                     }
                     
                 }
               };
+              var profil = "visuelProfil.php?id_user=<?php echo $_SESSION['id_user'] ?>";
               var email=document.getElementById('email').value;
               var old_password=document.getElementById('old_password').value;
               var new_password=document.getElementById('new_password').value;

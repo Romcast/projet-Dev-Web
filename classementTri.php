@@ -38,8 +38,9 @@ if ($utilisateur->num_rows > 0) {
     echo "<ul id='myUL'>";
     while($row = $utilisateur->fetch_assoc()) {
         $email = $row['email'];
+        $id_user = $row['id_user'];
         if ($email !='admin') {
-            echo "<li><a href='visuelProfil.php?email=$email'>";
+            echo "<li><a href='visuelProfil.php?id_user=$id_user'>";
             echo $i . '.';
             echo "<span class='tab'></span>";
             echo "<img src='" . $row['image'] . "' alt='Introuvable' width='30' height='30'>";

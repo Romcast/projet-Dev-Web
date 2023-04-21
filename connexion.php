@@ -31,11 +31,12 @@
               
             xhttp.onreadystatechange=function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    if (this.response){
+                    if (this.response==0){
                         document.getElementById("err").innerHTML = "Email ou mot de passe incorrecte";
                     }
                     else{
-                        window.location = "profil.php";
+                        var profil = "visuelProfil.php?id_user="+this.response;
+                        window.location = profil;
                     }
                     
                 }

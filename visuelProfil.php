@@ -1,13 +1,11 @@
 <?php
 include('header.php');
 require('sqlConn.php');
-$email = $_GET['email'];
-if (isset($_SESSION['email']) && $email == $_SESSION['email']){
-    header("Location:profil.php");
-}
-$user = $conn->query("SELECT * FROM utilisateur WHERE email = '$email'");
+$id_user = $_GET['id_user'];
+$user = $conn->query("SELECT * FROM utilisateur WHERE id_user = '$id_user'");
 if ($user->num_rows > 0) {
     $row = $user->fetch_assoc();
+    $email = $row['email'];
     $nom = $row['nom'];
     $prenom = $row['prenom'];
     $note_moy = $row['note_moy'];
@@ -49,8 +47,22 @@ if ($user->num_rows > 0) {
             </label><br><br>
             <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1){
                 $page="window.location='nouveauUtilSemaine.php?email=$email'";
-                echo "<button onclick=$page >Choisir comme uilisateur de la semaine</button>";
+                echo "<button onclick=$page >Choisir comme utilisateur de la semaine</button>";
             }
+
+            if(isset($_SESSION['email']) && $_SESSION['email'] == $email){
+                $modif="window.location='changeProfil.php'";
+                $eff = "window.location='verifEffacer.php'";
+                echo '<div class="bouton">';
+                echo '<button onclick='. $modif . '>Modifier</button><br><br>';
+                echo '<form action="deconnexion.php">';
+                echo '<button type="submit">Déconnexion</button>';
+                echo '</form>';
+                echo '<button onclick=' . $eff . '>Effacer</button>';
+            }
+
+            include('recetteUtil.php')
+
             ?>
           </div>
           <br>
