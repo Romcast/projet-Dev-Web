@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="commentaires.css"> <!-- Lien vers le fichier CSS -->
 </head>
 <body>
+
+
     <br>
     <br>
     <button id="toggle-comments">Cacher les commentaires</button>
@@ -13,7 +15,7 @@
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-            
+
             if(isset($_SESSION['ban']) && $_SESSION['ban'] == 0){
         ?>
             <h2>Ajouter un commentaire</h2>
@@ -30,15 +32,16 @@
     </div>
     <div class="comments">
     <h1>Commentaires</h1>
-    <form method="post">
+    <form method="post" action="traitement_tri.php">
         <label for="tri">Trier par :</label>
         <select id="tri" name="tri">
-            <option value="date">Date</option>
-            <option value="note">Note</option>
+            <option value="date">Les + récents</option>
+            <option value="note">Les mieux notés</option>
             <option value="rien">Pas de filtre</option>
         </select>
         <button type="submit">Trier</button>
     </form>
+
         <?php 
             if(isset($_SESSION['ban']) && $_SESSION['ban'] == 0){
                 if (isset($_GET['id'])) {
@@ -49,6 +52,7 @@
                 }
             } 
         ?>
+    </div>
     </div>
     <script>
         var button = document.getElementById("toggle-comments");
@@ -67,6 +71,7 @@
             }
         });
     </script>
+
 </body>
 </html>
 
