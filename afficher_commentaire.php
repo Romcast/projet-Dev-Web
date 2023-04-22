@@ -70,6 +70,9 @@ function deleteComment(commentId) {
         success: function(response) {
             // Actualiser la liste des commentaires affichée sur la page
             $('.comments').load('afficher_commentaire.php');
+        },
+        error: function() {
+            alert('Une erreur est survenue lors de la suppression du commentaire.');
         }
     });
 }
@@ -77,6 +80,15 @@ function deleteComment(commentId) {
 // Gérer le clic sur le bouton "supprimer" d'un commentaire
 $(document).on('click', '.comment-delete', function() {
     var commentId = $(this).data('comment-id');
-    deleteComment(commentId);
+    var authorEmail = $(this).data('author-email');
+    var currentUserEmail = "<?php echo $_SESSION['email'] ?>";
+    var isAdmin = "<?php echo $_SESSION['administrateur'] ?>";
+
+    if (currentUserEmail === authorEmail || isAdmin == 1) {
+        deleteComment(commentId);
+    } else {
+        alert('Vous ne pouvez pas supprimer ce commentaire car vous n\'êtes pas son auteur.');
+    }
 });
+
 </script>
