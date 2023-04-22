@@ -18,19 +18,7 @@ $dbco = new PDO("mysql:host=$serveur;dbname=$dbname;charset=utf8", $user, $pass)
 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try {
-    // On crée une table commentaire si elle n'existe pas déjà
-    $commentaire = "CREATE TABLE IF NOT EXISTS commentaire(
-        commentaire_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        mail_auteur VARCHAR(50) NOT NULL,
-        commentaire VARCHAR(5000),
-        note INT NOT NULL,
-        date_creation DATETIME NOT NULL,
-        recette_id INT UNSIGNED,
-        FOREIGN KEY(recette_id) REFERENCES form_recette(id) ON DELETE CASCADE
-    )";
-    if ($dbco->exec($commentaire) === false) {
-        echo "La table commentaire existe déjà ou il y a une erreur; ";
-    }
+    //la table commentaire est créée, si elle n'existe pas, dans visuelrecette.php à l'ouverture de la page recette
 
     // Insérer le commentaire dans la base de données avec l'ID de la page
     $query = "INSERT INTO commentaire (mail_auteur, commentaire, note, date_creation, recette_id) VALUES (:mail_auteur, :commentaire, :note, :date_creation, :recette_id)";
@@ -43,14 +31,42 @@ try {
         ':recette_id' => $recette_id,
     ]);
 
-    if ($result === false) {
+    if (!$result) {
         echo "Une erreur s'est produite lors de l'exécution de la requête.";
     }
+
+    $moyenne_note_query_recette = $dbco->query("SELECT AVG(note) FROM commentaire WHERE recette_id = $recette_id");
+    $moyenne_note_recette = $moyenne_note_query_recette->fetchColumn();
+    $update_note_recette = "UPDATE form_recette SET note = $moyenne_note_recette WHERE id = $recette_id";
+
+    if($dbco->exec($update_note_recette)){
+        echo "note ";
+    }
+    else{
+        echo "erreur note";
+    }
+
+    $auteur_query =$dbco->query("SELECT auteur FROM form_recette WHERE id = $recette_id");
+    $auteur = $auteur_query->fetchColumn();
+    $moyenne_note_query_user = $dbco->query("SELECT AVG(note) FROM form_recette WHERE auteur = '$auteur'");
+    $moyenne_note_user = $moyenne_note_query_user->fetchColumn();
+    $update_note_user = "UPDATE utilisateur SET note_moy = $moyenne_note_user WHERE email = '$auteur'";
+    
+    if($dbco->exec($update_note_user)){
+        echo " note user ";
+    }
+    else{
+        echo " erreur note user";
+    }
+
+
 
     if (isset($_GET['id'])) {
         include_once("visuelrecette.php");
     }
-} catch (PDOException $e) {
+}
+
+catch (PDOException $e) {
     echo 'Erreur : '.$e->getMessage();
 }
 
