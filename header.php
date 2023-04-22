@@ -1,4 +1,5 @@
 <?php
+require('createMiam.php');
 if(!isset($_SESSION)){
     session_start();
 }

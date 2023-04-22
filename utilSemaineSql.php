@@ -5,7 +5,7 @@ if ($user->num_rows > 0) {
     $row = $user->fetch_assoc();
     $id_user = $row['id_user'];
     $email = $row['email'];
-    $recette = $conn->query("SELECT * FROM form_recette WHERE auteur = '$email' AND note = (SELECT MAX(note) FROM form_recette WHERE auteur = '$email')");
+    $recette = $conn->query("SELECT * FROM form_recette WHERE auteur = '$email' AND note = (SELECT MAX(note) FROM form_recette WHERE auteur = '$email') LIMIT 1");
     if ($recette != false && $recette->num_rows > 0){
         $nom = $row['nom'];
         $prenom = $row['prenom'];

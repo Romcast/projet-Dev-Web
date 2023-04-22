@@ -19,7 +19,7 @@ setcookie('email',$email);
 
 
 
-if ($_SESSION['administrateur'] == 1) {
+if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) {
     $is_admin = true;
   } else {
     $is_admin = false;

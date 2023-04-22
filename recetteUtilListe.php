@@ -38,32 +38,32 @@ if ($recette != false && $recette->num_rows > 0) {
     $i = 1;
     echo "<ul id='myUL'>";
     while($row = $recette->fetch_assoc()) {
-        $id = $row['id'];        
-        echo "<li><a href='visuelrecette.php?id=$id'>";
-        echo $i . '.';
-        echo "<span class='tab'></span>";
-        echo "<img src='" . $row['photo'] . "' alt='Introuvable' width='30' height='30'>";
-        echo " ";
-        echo "<label id='nom'>" . $row['nom'] . "</label>";
-        echo "<span class='tab'></span>";
-        echo "<label>" . $row['type_repas'] . "</label>";
-        echo "<span class='tab'></span>";
-        echo "Difficulté: " . $row['difficulte'];
-        echo "<span class='tab'></span>";
-        echo "Nombre personnes : " . "<label>" . $row['nombre_personnes'] . "</label>";
-        echo "<span class='tab'></span>";
-        echo "Note moyenne : " . $row['note'];
-        echo "<span class='tab'></span>";
-        echo "Cout : " . "<label>" . $row['cout_recette'] . "</label>";
-        echo "</a></li>";
-        $i = $i + 1;
+        if ($row['traitement'] == 'Validé'){
+            $id = $row['id'];        
+            echo "<li><a href='visuelrecette.php?id=$id'>";
+            echo $i . '.';
+            echo "<span class='tab'></span>";
+            if ($row['photo'] != ""){
+                echo "<img src='" . $row['photo'] . "' alt='Introuvable' width='30' height='30'>";
+                echo " ";
+            }
+            echo "<label id='nom'>" . $row['nom'] . "</label>";
+            echo "<span class='tab'></span>";
+            echo "<label>" . $row['type_repas'] . "</label>";
+            echo "<span class='tab'></span>";
+            echo "Difficulté: " . $row['difficulte'];
+            echo "<span class='tab'></span>";
+            echo "Nombre personnes : " . "<label>" . $row['nombre_personnes'] . "</label>";
+            echo "<span class='tab'></span>";
+            echo "Note moyenne : " . $row['note'];
+            echo "<span class='tab'></span>";
+            echo "Cout : " . "<label>" . $row['cout_recette'] . "</label>";
+            echo "</a></li>";
+            $i = $i + 1;
+        }
         
     }
     echo "</ul>";
 }
 
-else{
-   echo $email;
-    
-}
 ?> 

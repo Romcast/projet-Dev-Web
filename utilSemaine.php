@@ -15,7 +15,10 @@
                 <a href="visuelrecette.php?id=<?php echo $id_recette?>">
                 <div class="recette_util_semaine ">
                         <label style="font-size:20">Meilleure recette :</label>
-                           <img src= <?php echo $photo_recette ?> alt="introuvable" width="50" height="50" >
+                        <?php if ($photo_recette != ""){
+                            echo '<img src=' . $photo_recette . 'alt="introuvable" width="50" height="50" >';
+                            }
+                        ?>
                             <div class="description_util_semaine"> 
                                 <label style="font-size:30"><?php echo $nom_recette ?></label>
                                 <span class='tab'></span>
