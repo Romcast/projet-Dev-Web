@@ -1,7 +1,4 @@
 <?php
-// Récupérer les données du formulaire
-//$page_id = $_POST['page_id'];
-//$username = $_POST['username'];
 if(!isset($_SESSION)){
     session_start();
 }
@@ -64,10 +61,10 @@ try{
     $update_note_user = "UPDATE utilisateur SET note_moy = $moyenne_note_user WHERE email = '$auteur'";
     
     if($dbco->exec($update_note_user)){
-        echo "note user ";
+        echo " note user ";
     }
     else{
-        echo "erreur note user";
+        echo " erreur note user";
     }
 
     if (isset($_GET['id'])) {
@@ -80,13 +77,5 @@ catch(PDOException $e){
     echo 'Erreur : '.$e->getMessage();
 }
 $dbco= null;
-
-// Vérifier si l'insertion a réussi
-// if ($result) {
-//     header("Location: formulaire_commentaires.php"); // Rediriger vers la page du formulaire de commentaire
-// } else {
-//     echo "Erreur lors de l'ajout du commentaire : " . $mysqli->error;
-
-// }
 
 ?>
