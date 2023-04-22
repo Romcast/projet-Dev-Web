@@ -11,8 +11,19 @@ if ($user->num_rows > 0) {
     $note_moy = $row['note_moy'];
     $image = $row['image'];
     $date = $row['date_creation'];
+    $ban=$row['ban'];
 }
+setcookie('ban', $ban);
+setcookie('id', $id_user);
+setcookie('email',$email);
 
+
+
+if ($_SESSION['administrateur'] == 1) {
+    $is_admin = true;
+  } else {
+    $is_admin = false;
+  }
 
 ?>
 
@@ -45,10 +56,26 @@ if ($user->num_rows > 0) {
             <label>
                 Compte créé le : <?php echo $date ; ?>
             </label><br><br>
+
+            <label>
+                <?php 
+                    if ($ban==1){
+                        echo 'Mute';
+                    }
+                    else{
+                        echo 'Non Mute';
+                    } ?></label><br><br>
+            
+            <?php if ($is_admin): ?>
+            <form action="Bannir.php" method="post">
+                <button type="submit" name="ban" value="<?php echo $ban ?>"><?php echo ($ban == 1) ? 'Débannir' : 'Bannir' ?></button>
+            </form>
+            <?php endif; ?>
             <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1){
                 $page="window.location='nouveauUtilSemaine.php?email=$email'";
                 echo "<button onclick=$page >Choisir comme utilisateur de la semaine</button>";
             }
+
 
             if(isset($_SESSION['email']) && $_SESSION['email'] == $email){
                 $modif="window.location='changeProfil.php'";
