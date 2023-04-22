@@ -11,18 +11,20 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="liste.css" rel="stylesheet" type="text/css">
         <title>Traitement recettes validée</title>
     </head>
     <body>
         <h1>Liste des recettes</h1>
-        <section class="afficher">
+        <section class="recettes">
             <?php
                 if($nouvellerecette->rowCount()>0){
                     while($r=$nouvellerecette->fetch()){
                         ?>
-                        <p><a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a><?php echo " "; echo $r['auteur']?>
-                    </p>
-
+                        <div class="recette">
+                            <img src="<?php echo isset($r['image']) ? $r['image'] : ''; ?>" alt="Image de la recette">
+                            <p><a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a><?php echo " "; echo $r['auteur']?></p>
+                        </div>
                         <?php
                     }
                 }
