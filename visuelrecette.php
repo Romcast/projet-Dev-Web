@@ -102,10 +102,13 @@
         <h4> Note de la recette:</h4>
         <p> <?php echo $note."/5" ?>
 
-<?php 
+
+    <?php 
+        
         if(!isset($_SESSION)){
             session_start();
         }
+        include_once("creation_table_commentaire.php");
         $_SESSION['recette_id']=$id;
         if (isset($_SESSION['id_user'],$_SESSION['email'],$_SESSION['recette_id'])){
             $verif_comm=$bdd->prepare("SELECT COUNT(*) FROM commentaire WHERE mail_auteur=? AND recette_id=?");
@@ -114,10 +117,10 @@
             if($nb_comm>0){
                 require_once("afficher_commentaire.php");
                 echo ' vous avez déja commenté.'. '<br>';
-                echo "Nom de la session : " . session_name() . "<br>";
-                foreach($_SESSION as $key => $value) {
-                    echo "Variable de session : " . $key . " = " . $value . "<br>";
-}
+                // echo "Nom de la session : " . session_name() . "<br>";
+                // foreach($_SESSION as $key => $value) {
+                //     echo "Variable de session : " . $key . " = " . $value . "<br>";
+                // }
             }
             else{
                 require_once("formulaire_commentaires.php");
