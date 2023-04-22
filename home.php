@@ -12,19 +12,19 @@
         <br>
         <br>
         <div class="slideshow-container">
-            <a href="entree.html">
+            <a href="entree.php">
               <div class="slide">
                 <img src="image/salade.jpg" alt="Image 1">
                 <div class="caption">Entrées</div>
               </div>
             </a>
-            <a href="plats.html">
+            <a href="plats.php">
               <div class="slide">
                 <img src="image/entrecote.jpg" alt="Image 2">
                 <div class="caption">Plats</div>
               </div>
             </a>
-            <a href="desserts.html">
+            <a href="desserts.php">
               <div class="slide">
                 <img src="image/profiteroles.jpg" alt="Image 3">
                 <div class="caption">Desserts</div>
