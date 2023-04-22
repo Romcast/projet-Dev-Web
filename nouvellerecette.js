@@ -5,62 +5,30 @@ let champUnite = document.getElementById("unite");
 let listeIngredients = document.getElementById("ingredients");
 
 
-//ingredient sous forme de liste
-
-
-// boutonAjouterIngredient.addEventListener("click", function() {
-// 	var nouvelIngredient = champNouvelIngredient.value;
-//   var quantite=champQuantite.value;
-//   var unite=champUnite.value;
-// 	if (nouvelIngredient) {
-// 		var nouvelElementListe = document.createElement("li");
-//     if (unite==""){
-//       nouvelElementListe.innerText = quantite+unite+" "+ nouvelIngredient+"  ";
-//     }
-//     else{
-//       nouvelElementListe.innerText = quantite+unite+" de "+ nouvelIngredient+"  ";
-//     }
-// 		//nouvelElementListe.innerText = quantite+unite+" de "+ nouvelIngredient;
-// 		listeIngredients.appendChild(nouvelElementListe);
-// 		champNouvelIngredient.value = "";
-//     champUnite.value="";
-//     champQuantite.value="";
-
-// 	}
-//   //creation du bouton pour supprimer l'élément de la liste
-//   var boutonSuppression=document.createElement("button");
-//   var bouton_text= document.createTextNode("-");
-//   boutonSuppression.appendChild(bouton_text);
-//   listeIngredients.lastChild.appendChild(boutonSuppression);
-//   //fonction pour faire fonctionner boutonSuppression
-//   boutonSuppression.addEventListener("click", function(event) {
-//     //event.preventDefault();  // sert a eviter que la page s'acctualise a chaque suppression
-//     listeIngredients.removeChild(nouvelElementListe);
-//   });
-// });
-
-
 //ingredient sous forme d'input
 boutonAjouterIngredient.addEventListener("click", function() {
 	var ingredient = champNouvelIngredient.value;
   var quantite=champQuantite.value;
   var unite=champUnite.value;
-  
+
 	if (ingredient && quantite) {
     var nouvelIngredient=document.createElement("input");
     nouvelIngredient.name="nouvelIngredient[]";
     nouvelIngredient.value=ingredient;
 
-
 		var nouvelleQuantite = document.createElement("input");
     nouvelleQuantite.type="number";
     nouvelleQuantite.name="nouvelleQuantite[]";
     nouvelleQuantite.value=quantite;
+    nouvelleQuantite.min=1;
 
     var nouvelleUnite= document.createElement("select");
     nouvelleUnite.name="nouvelleUnite[]";
-    nouvelleUnite.value = unite;
+    nouvelleUnite.value = "unite";
     
+    var uniteChoisie=document.createElement("option");
+    uniteChoisie.value=unite;
+    uniteChoisie.text=unite;
 
     var sansUnite=document.createElement("option");
     sansUnite.value=" ";
@@ -98,6 +66,7 @@ boutonAjouterIngredient.addEventListener("click", function() {
     cas.value="c-à-s";
     cas.text="c-à-s";
 
+    nouvelleUnite.appendChild(uniteChoisie);
     nouvelleUnite.appendChild(sansUnite);
     nouvelleUnite.appendChild(mL);
     nouvelleUnite.appendChild(L);
@@ -109,7 +78,6 @@ boutonAjouterIngredient.addEventListener("click", function() {
     nouvelleUnite.appendChild(cas);
 
 
-
 		listeIngredients.appendChild(nouvelleQuantite);
     listeIngredients.appendChild(nouvelleUnite);
     listeIngredients.appendChild(nouvelIngredient);
@@ -119,15 +87,15 @@ boutonAjouterIngredient.addEventListener("click", function() {
     champUnite.value="";
     champQuantite.value="";
 
-  var boutonSuppression=document.createElement("button");
-  var bouton_text= document.createTextNode("-");
-  boutonSuppression.appendChild(bouton_text);
-  listeIngredients.appendChild(boutonSuppression);
-  var retourLigne=document.createElement("br");
-  listeIngredients.appendChild(retourLigne);
+    //creation du bouton pour supprimer l'élément de la liste
+    var boutonSuppression=document.createElement("button");
+    var bouton_text= document.createTextNode("-");
+    boutonSuppression.appendChild(bouton_text);
+    listeIngredients.appendChild(boutonSuppression);
+    var retourLigne=document.createElement("br");
+    listeIngredients.appendChild(retourLigne);
 
 	}
-  //creation du bouton pour supprimer l'élément de la liste
   
   //fonction pour faire fonctionner boutonSuppression
   boutonSuppression.addEventListener("click", function(event) {
@@ -139,24 +107,6 @@ boutonAjouterIngredient.addEventListener("click", function() {
     listeIngredients.removeChild(retourLigne);
   });
 });
-
-
-
-
-
-
-
-// let boutonSupprimerIngredient = document.getElementById("supprimer_dernier_ingredient");
-// boutonSupprimerIngredient.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     // sert a eviter que la page s'acctualise a chaque suppression
-//     var DernierIngredient = listeIngredients.lastElementChild;
-//     if (DernierIngredient) {
-//       listeIngredients.removeChild(DernierIngredient);
-//     }
-//   });
-
-  
 
 let boutonAjouterEtape = document.getElementById("ajouter_etape");
 let champNouvelleEtape = document.getElementById("nouvelle_etape");
@@ -181,7 +131,7 @@ boutonAjouterEtape.addEventListener("click", function() {
 	}
 
   
-  //fonction pour faire fonctionner boutonSuppression
+  //fonction pour faire fonctionner boutonSuppression de l'etape
   boutonSuppression.addEventListener("click", function(event) {
     event.preventDefault();  // sert a eviter que la page s'acctualise a chaque suppression
     listeEtapes.removeChild(nouvelleEtape);
@@ -190,21 +140,6 @@ boutonAjouterEtape.addEventListener("click", function() {
   });
 });
 
-
-
-// function nonVide(){
-//   var caseIngredient=document.getElementById("ingredients").innerHTML;
-//   var caseEtape=document.getElementById("etapes").innerHTML;
-//   if (caseIngredient.trim() ==='' ||  caseEtape.trim() ===''){
-    
-//     alert("Au moins une étape et un ingrédients sont requis");
-//     return false
-//   }
-//   else{
-
-//     return true;
-//   }
-// }
 
 function nonVide(){
   var caseIngredient=document.getElementById("ingredients").innerHTML;
@@ -218,43 +153,3 @@ function nonVide(){
    
   }
 }
-
-// let boutonSupprimerEtape = document.getElementById("supprimer_derniere_etape");
-// boutonSupprimerEtape.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     // sert a eviter que la page s'acctualise a chaque suppression
-//     var DerniereEtape = listeEtapes.lastElementChild;
-//     if (DerniereEtape) {
-//       listeEtapes.removeChild(DerniereEtape);
-//     }
-//   });
-
-// boutonAjouterEtape.addEventListener("click", function() {
-// 	var nouvelleEtape = champNouvelleEtape.value;
-// 	if (nouvelleEtape) {
-// 		var nouvelElementListe = document.createElement("li");
-// 		nouvelElementListe.innerText = nouvelleEtape;
-// 		listeEtapes.appendChild(nouvelElementListe);
-// 		champNouvelleEtape.value = "";
-// 	}
-
-//   var boutonSuppression=document.createElement("button");
-//   var bouton_text= document.createTextNode("-");
-//   boutonSuppression.appendChild(bouton_text);
-//   listeEtapes.lastChild.appendChild(boutonSuppression);
-//   //fonction pour faire fonctionner boutonSuppression
-//   boutonSuppression.addEventListener("click", function(event) {
-//     //event.preventDefault();  // sert a eviter que la page s'acctualise a chaque suppression
-//     listeEtapes.removeChild(nouvelElementListe);
-//   });
-// });
-
-// let boutonSupprimerEtape = document.getElementById("supprimer_derniere_etape");
-// boutonSupprimerEtape.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     // sert a eviter que la page s'acctualise a chaque suppression
-//     var DerniereEtape = listeEtapes.lastElementChild;
-//     if (DerniereEtape) {
-//       listeEtapes.removeChild(DerniereEtape);
-//     }
-//   });
