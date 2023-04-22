@@ -23,11 +23,11 @@ if(!isset($_SESSION)){
             <h1 onclick="window.location='home.php'">Miam</h1>
             <div class="onglets">
                 <div class="menu">
-                 <a href="categories.html" class="titre">Catégories</a>
+                 <label class="titre">Catégories</label>
                  <ul class="categories">
-                     <li><a href="entree.html">Entrées</a></li>
-                     <li><a href="plats.html">Plats</a></li>
-                     <li><a href="desserts.html">Desserts</a></li>
+                     <li><a href="entree.php">Entrées</a></li>
+                     <li><a href="plats.php">Plats</a></li>
+                     <li><a href="desserts.php">Desserts</a></li>
                  </ul>
                 </div>
                 <a href="classement.php" class="titre">Classement</a>
