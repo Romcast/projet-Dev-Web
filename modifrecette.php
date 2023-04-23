@@ -1,7 +1,7 @@
 <?php
 require('header.php');
     $servername ="localhost";
-    $username ="root";.
+    $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
 //on recupere les donnee existante pour cet id 
