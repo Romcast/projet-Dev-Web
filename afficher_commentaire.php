@@ -44,7 +44,7 @@
                     $statement2->execute();
                     $id_user=$statement2->fetchColumn();
                     if($_SESSION['administrateur']==1||$_SESSION['email']==$auteur){
-                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" .'</div>'. '</div>';
+                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. "<button class='comment-delete' onclick=\"deleteComment(".$commentaire['commentaire_id'].")\" data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" .'</div>'. '</div>';
                     }else{
                         echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'.'</div>'. '</div>';
                     }
@@ -77,16 +77,17 @@ function deleteComment(commentId) {
         success: function(response) {
             // Actualiser la liste des commentaires affichée sur la page
             $('.comments').load('afficher_commentaire.php');
+            
         },
         error: function() {
             alert('Une erreur est survenue lors de la suppression du commentaire.');
         }
     });
+    location.reload();
 }
 
 
 </script>
 
 
-    
     

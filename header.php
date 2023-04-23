@@ -10,6 +10,7 @@ if(!isset($_SESSION)){
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="header.css" rel="stylesheet" type="text/css">
+        <link href="site.css" rel="stylesheet" type="text/css">
         
     </head>
 
@@ -25,36 +26,39 @@ if(!isset($_SESSION)){
                 <div class="menu">
                  <label class="titre">Catégories</label>
                  <ul class="categories">
-                     <li><a href="entree.php">Entrées</a></li>
-                     <li><a href="plats.php">Plats</a></li>
-                     <li><a href="desserts.php">Desserts</a></li>
+                    
+                     <li><button onclick="window.location='entree.php'">Entrée</button></li>
+                     <li><button onclick="window.location='plats.php'">Plat</button></li>
+                     <li><button onclick="window.location='desserts.php'">Dessert</button></li>
                  </ul>
                 </div>
-                <a href="classement.php" class="titre">Classement</a>
+                <button onclick="window.location='classement.php'">Classement</button>
                 <div id='profil' class='profil'>
-                    <?php
+                   <?php
                     if (isset($_SESSION['email'])){
                         include('headerProfil.php');
                     }
                     else{
                         echo 'non connecté';
                         echo" ";
-                        echo"<a href=\"connexion.php\">Connexion</a>";
+                        echo "<button onclick=\"window.location='connexion.php'\">Connexion</button>";
                         echo" ";
-                        echo"<a href=\"inscription.php\">Inscription</a>";
+                        echo "<button onclick=\"window.location='inscription.php'\">Inscription</button>";
                         echo" ";
                     }
                     if(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==1){
-                        echo "<a href=\"listerecette.php\">Recette à gérer</a>";
+                        echo "<button onclick=\"window.location='listerecette.php'\">Recette à gérer</button>";
                         echo" ";
-                        echo "<a href=\"liste_ingredient_cout.php\">Mise à jour cout</a>";
+                        echo "<button onclick=\"window.location='liste_ingredient_cout.php'\">Mise à jour cout</button>";
                         echo" ";
-                        echo "<a href=\"listerecetteVALIDE.php\">Recette du site</a>";
+                        echo "<button onclick=\"window.location='listerecetteVALIDE.php'\">Recette du site</button>";
                         echo" ";
-                        //echo "<a href=\"nouvellerecette.php\">Nouvelle Recette</a>";
+                        echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
                         echo" ";
+                        echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
                     }elseif(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==0){
-                        echo "<a href=\"nouvellerecette.php\">Nouvelle Recette</a>";
+                        echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
+                        echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
                     }
                     
                     ?>

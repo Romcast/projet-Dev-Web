@@ -1,0 +1,19 @@
+button{
+    width: 150px;
+    height:80px;
+    color: #eaccc5;
+    background:rgb(45, 107, 161);
+    border: 0px;
+    border-radius: 10px;
+    font-family: Consolas, monaco, monospace;
+}
+button:hover{
+    cursor:pointer; 
+    color:aliceblue;
+}
+body{
+    font-family: Consolas, monaco, monospace;
+}
+/*.btn{
+    
+}*/
