@@ -19,6 +19,7 @@
         <div class="bouton">
             <button type="button" onclick="f()">Se connecter</button>
             <br>
+            <br>
           </div>
         <div class="bouton">
             <button onclick="window.location='inscription.php'">S'inscrire</button>
