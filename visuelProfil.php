@@ -88,9 +88,10 @@ if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) {
                 echo '<button onclick=' . $eff . '>Effacer</button>';
             }
 
-            include('recetteUtil.php')
-
+            include('recetteUtil.php');
             ?>
+            <br><br>
+            <?php include('commentaireUtil.php') ?>
           </div>
           <br>
         </div>

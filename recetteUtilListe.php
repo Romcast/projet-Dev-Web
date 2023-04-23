@@ -17,24 +17,25 @@ switch($sens){
 switch($choix){
     case "Nom":
         $query = "SELECT * FROM form_recette WHERE auteur='$email' ORDER BY nom $s";
+        $recette = $conn->query($query);
         break;
     case "Nombre personne":
         $query = "SELECT * FROM form_recette WHERE auteur='$email' ORDER BY nombre_personnes $s";
+        $recette = $conn->query($query);
         break;
     case "Note moyenne":
         $query = "SELECT * FROM form_recette WHERE auteur='$email' ORDER BY note  $s";
+        $recette = $conn->query($query);
         break;
     case "Cout":
         $query = "SELECT * FROM form_recette WHERE auteur='$email' ORDER BY cout_recette $s";
+        $recette = $conn->query($query);
         break;
     default:
-        $query = "";
 
 }
 
-$recette = $conn->query($query);
-
-if ($recette != false && $recette->num_rows > 0) {
+if (isset($recette) && $recette != false && $recette->num_rows > 0) {
     $i = 1;
     echo "<ul id='myUL'>";
     while($row = $recette->fetch_assoc()) {

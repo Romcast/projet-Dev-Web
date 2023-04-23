@@ -27,7 +27,7 @@
     <br>
     <br>
 
-    <input type="text" id="myInput" onkeyup="filtre()" placeholder="Search for names.." title="Type in a name">
+    <input type="text" id="myInput" onkeyup="filtre()" placeholder="Recherchez une recette..." title="Entrez une recette">
 
     <div id="liste">
 </div>
@@ -36,7 +36,7 @@
     function filtre() {
         var input, filter, ul, li, a, i, txtValue;
         input = document.getElementById("myInput");
-        input_choix = document.getElementById("choix");
+        
         filter = input.value.toUpperCase();
         ul = document.getElementById("myUL");
         li = ul.getElementsByTagName("li");
