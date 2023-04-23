@@ -43,8 +43,11 @@
                     $statement2->bindParam(':email', $auteur);
                     $statement2->execute();
                     $id_user=$statement2->fetchColumn();
-
-                    echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" . '</div>'. '</div>';
+                    if($_SESSION['administrateur']==1||$_SESSION['email']==$auteur){
+                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" .'</div>'. '</div>';
+                    }else{
+                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'.'</div>'. '</div>';
+                    }
                     //echo "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>";
                 }
             }
@@ -81,20 +84,9 @@ function deleteComment(commentId) {
     });
 }
 
-// Gérer le clic sur le bouton "supprimer" d'un commentaire
-$(document).on('click', '.comment-delete', function() {
-    var commentId = $(this).data('comment-id');
-    var authorEmail = $(this).data('author-email');
-    var currentUserEmail = "<?php echo $_SESSION['email'] ?>";
-    var isAdmin = "<?php echo $_SESSION['administrateur'] ?>";
 
-    if (currentUserEmail === authorEmail || isAdmin == 1) {
-        deleteComment(commentId);
-    } else {
-        alert('Vous ne pouvez pas supprimer ce commentaire car vous n\'êtes pas son auteur.');
-    }
-});
 </script>
 
 
+    
     
