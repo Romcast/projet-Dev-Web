@@ -16,7 +16,9 @@ try{
         mail_auteur VARCHAR(50) NOT NULL,
         commentaire VARCHAR(5000),
         note INT,
+        date_creation DATETIME NOT NULL,
         recette_id iNT UNSIGNED,
+        UNIQUE(recette_id,mail_auteur),
         FOREIGN KEY(recette_id) REFERENCES form_recette(id) ON DELETE CASCADE
         )";
     $dbco->exec($commentaire);
