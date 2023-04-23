@@ -1,6 +1,7 @@
 <html>
     <head>
         <link href="afficher_commentaire.css" rel="stylesheet" type="text/css">
+        
     </head>
     <body>
 
@@ -35,7 +36,7 @@
                 $statement->bindParam(':recette_id', $recette_id);
                 $statement->execute();
                 $commentaires=$statement->fetchAll(PDO::FETCH_ASSOC);
-                echo '<div>' . '<div class="ligne">' . '<div >' . 'auteur'. '</div>'.'<div>'. 'commentaire'.'</div>' . '<div >' . 'note' .'</div>'. '</div>'. '</div>';
+                echo '<div>' . '<div class="ligne">' . '<div id="titre_auteur" >' . 'auteur'. '</div>'.'<div id="titre_commentaire">'. 'commentaire'.'</div>' . '<div id="titre_note">' . 'note' .'</div>'. '<div id="titre_date">' . 'date'. '</div>' . '</div>'. '</div>';
                 foreach($commentaires as $commentaire){
                     // On récupère l'ID utilisateur correspondant à l'auteur du commentaire
                     $auteur=$commentaire['mail_auteur'];
@@ -44,9 +45,9 @@
                     $statement2->execute();
                     $id_user=$statement2->fetchColumn();
                     if($_SESSION['administrateur']==1||$_SESSION['email']==$auteur){
-                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. "<button class='comment-delete' onclick=\"deleteComment(".$commentaire['commentaire_id'].")\" data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" .'</div>'. '</div>';
+                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>".$commentaire['mail_auteur']."</a>" . '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'. '</div>'. "<button class='comment-delete' onclick=\"deleteComment(".$commentaire['commentaire_id'].")\" data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>" .'</div>';
                     }else{
-                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>",$commentaire['mail_auteur'],"</a>". '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'.'</div>'. '</div>';
+                        echo '<div id="commentaires">' . '<div class="ligne">' . '<div class="auteur">' . "<a href='visuelProfil.php?id_user=$id_user'>".$commentaire['mail_auteur']."</a>" . '</div>'. '<div class="commentaire">' . $commentaire['commentaire'] . '</div>'. '<div class="note">' . $commentaire['note'] . '</div> ' . '<div class="date">' . $commentaire['date_creation'] .'</div>'.'</div>'. '</div>';
                     }
                     //echo "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>";
                 }
@@ -58,8 +59,9 @@
         }
 
         $dbco=null;
+        
         ?>
-
+        
     </body>
 
 </html>
