@@ -9,13 +9,13 @@
 
     <h2>Commentaires de l'utilisateur</h2>
     
-    <select id="choix_commentaire" size="1" onchange="f()">
+    <select id="choix_commentaire" size="1" onchange="f_c()">
         <option>--------</option>
         <option> Nom recette </option>
         <option> Commentaire </option>
     </select>
 
-    <select id="sens_commentaire" size="1" onchange="f()">
+    <select id="sens_commentaire" size="1" onchange="f_c()">
         <option> Croissant </option>
         <option> Décroissant </option>
         
@@ -24,13 +24,13 @@
     <br>
     <br>
 
-    <input type="text" id="myInput_commentaire" onkeyup="filtre()" placeholder="Recherchez un commentaire..." title="Entrez votre commentaire">
+    <input type="text" id="myInput_commentaire" onkeyup="filtre_c()" placeholder="Recherchez un commentaire..." title="Entrez votre commentaire">
 
     <div id="liste_commentaire">
 </div>
 
     <script>
-    function filtre() {
+    function filtre_c() {
         var input, filter, ul, li, a, i, txtValue,inputChoix,k;
         input = document.getElementById("myInput_commentaire");
         inputChoix = document.getElementById("choix_commentaire");
@@ -61,12 +61,12 @@
     }
     }
 
-    function f() {
+    function f_c() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("liste_commentaire").innerHTML = this.responseText;
-            filtre();
+            filtre_c();
             }
         };
         var email = "<?php echo $email?>";
