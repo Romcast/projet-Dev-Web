@@ -60,9 +60,7 @@
               recette_id iNT UNSIGNED,
               FOREIGN KEY(id) REFERENCES form_recette(id) ON DELETE CASCADE
               )";
-            if(!$dbco->exec($form_ingredient)){
-              echo " erreur création table ingrédient ou table déjà existante; ";
-            }
+            $dbco->exec($form_ingredient);
 
             $form_etape=  "CREATE TABLE IF NOT EXISTS form_etape(
               id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -70,9 +68,8 @@
               recette_id iNT UNSIGNED,
               FOREIGN KEY(id) REFERENCES form_recette(id) ON DELETE CASCADE
               )";
-            if(!$dbco->exec($form_etape)){
-              echo " erreur creation table etape ou table existante; ";
-            }
+            $dbco->exec($form_etape);
+
             $utilisateur = "CREATE TABLE IF NOT EXISTS utilisateur(
               id_user INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
               email VARCHAR(100),
