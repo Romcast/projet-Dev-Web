@@ -68,7 +68,9 @@ if(!isset($_SESSION)){
                         echo "<button onclick=\"window.location='listeutilisateur.php'\">Liste utilisateurs</button>"; 
                         echo" ";
                         echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
+                        echo" ";
                         echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
+                        echo" ";
                         echo "<button onclick=\"window.location='listerecetteVALIDE.php'\">Liste des recettes</button>";
                         echo" ";
                     }
