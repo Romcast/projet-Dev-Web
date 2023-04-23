@@ -3,7 +3,7 @@
 ## MIAM: Site de recettes de cuisine
 
 Ce projet est un site web web recueillant des recettes de cuisine, nourrit par les internautes.
-Il s'appuie principalement sur les langages suivants: HTML, CSS, PHP, javascript, SQL
+Il s'appuie principalement sur les langages suivants: HTML, CSS, PHP, javascript, SQL.
 
 ### Installation
 L'installation consiste simplement à télécharger les fichiers du fichier ProjetDevWeb
