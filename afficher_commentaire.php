@@ -20,6 +20,10 @@
         $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         try{
+            if(!isset($_SESSION['email'])){
+                echo '<br> Connectez vous pour accéder aux commentaires';
+            }
+            else{
             if (isset($_SESSION['recette_id'])) {
                 $recette_id = $_SESSION['recette_id'];
                 $tri = isset($_POST['tri']) ? $_POST['tri'] : 'date';
@@ -52,6 +56,7 @@
                     //echo "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>";
                 }
             }
+        }
 
         }
 
