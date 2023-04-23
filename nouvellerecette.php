@@ -29,7 +29,7 @@
                 <option>Moyenne</option>
                 <option>Difficile</option>
             </select><br><br>
-            <label>Ingrédients:</label><br>
+            <label>Ingrédients</label><br>
             <div id="ingredients" name="ingredients[]" >
                 
                 
