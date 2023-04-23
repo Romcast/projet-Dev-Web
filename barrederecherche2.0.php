@@ -1,10 +1,12 @@
 <?php
     require('header.php');
-   $servername ="localhost";
+//On se connecte à la base de donnée
+    $servername ="localhost";
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
     $recette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé"');
+    //Si l'utilisateur effectue une recherche on recupere dans la base de donnée les données correspondante
     if(isset($_GET['rechercher'])AND !empty($_GET['rechercher'])){
         $recherche=$_GET['rechercher'];
         $recette=$bdd->prepare('SELECT * FROM form_recette WHERE traitement="Validé" AND nom REGEXP :mot_entier' );
@@ -22,11 +24,13 @@
     <body>
         <section class="afficher">
             <?php
+                //si il y a des recette a afficher on les affiche
                 if($recette->rowCount()>0){
                     while($r=$recette->fetch()){
                         ?>
                         <p><a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a>
                         <?php 
+                        //on met un nombre d'etoile en fonction de la note de la recette
                             if($r['note']==NULL){
                                 echo "pas de note";
                             }elseif(0<=$r['note'] && $r['note']<1){
