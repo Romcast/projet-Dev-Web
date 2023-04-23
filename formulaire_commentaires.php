@@ -32,14 +32,57 @@
     </div>
     <div class="comments">
     <h1>Commentaires</h1>
-    <form method="post" action="afficher_commentaire.php">
+    <form method="post">
         <label for="tri">Trier par :</label>
         <select id="tri" name="tri">
             <option value="date">Les + récents</option>
-            <option value="note">Les mieux notés</option>
+            <option selected value="dateasc">Les - récents</option>
+            <option selected value="note">Les mieux notés</option>
+            <option selected value="noteasc">Les pire notés</option>
         </select>
-        <button type="submit">Trier</button>
+        <button type="submit" name="submit">Trier</button>
     </form>
+    <?php
+     $serveur = "localhost";
+     $user = "root";
+     $pass = "";
+     $dbname = "miam";
+     // On se connecte à la BDD
+     $dbco = new PDO("mysql:host=$serveur;dbname=$dbname;charset=utf8", $user, $pass);
+     $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ if (isset($_SESSION['recette_id'])) {
+    $recette_id = $_SESSION['recette_id'];    
+    if(isset($_POST['submit'])){
+    $selectedValue = $_POST['tri'];
+    
+    if($selectedValue=="note"){
+        echo " Voici les meilleures notes";
+        $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY note DESC";
+    }elseif($selectedValue=="date"){
+        echo " Voici les commentaires les plus récents";
+        $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY date_creation, commentaire_id  DESC";
+    }elseif($selectedValue=="dateasc"){
+        echo " Voici les commentaires les plus anciens";
+        $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY date_creation, commentaire_id ASC";
+    }else{
+        echo " Voici les pires notes";
+        $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY note ASC";
+    }
+    $statement=$dbco->prepare($query);
+                $statement->bindParam(':recette_id', $recette_id);
+                $statement->execute();
+                $commentaires=$statement->fetchAll(PDO::FETCH_ASSOC);
+                foreach($commentaires as $commentaire){
+                    // On récupère l'ID utilisateur correspondant à l'auteur du commentaire
+                    $auteur=$commentaire['mail_auteur'];
+                    $statement2=$dbco->prepare("SELECT id_user FROM utilisateur WHERE email=:email");
+                    $statement2->bindParam(':email', $auteur);
+                    $statement2->execute();
+                    $id_user=$statement2->fetchColumn();
+                }
+}
+}
+?>
 
         <?php 
             if(isset($_SESSION['ban']) && $_SESSION['ban'] == 0){
@@ -69,8 +112,20 @@
                 button.innerHTML = "Afficher les commentaires";
             }
         });
+        function getValue() {
+         // Récupération de l'élément select
+        const selectElement = document.getElementById("tri");
+
+        // Récupération de la valeur sélectionnée
+        const selectedValue = selectElement.value;
+
+         // Affichage de la valeur sélectionnée
+        console.log(selectedValue);
+
+        // Retour de la valeur sélectionnée
+         return selectedValue;
+        }
     </script>
 
 </body>
 </html>
-
