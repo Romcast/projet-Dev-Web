@@ -1,0 +1,169 @@
+/* Style de base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* En-tête */
+  header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  header h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+  
+  header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  header nav ul li {
+    margin-left: 10px;
+  }
+  
+  header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+  }
+  
+  header nav ul li a:hover {
+    background-color: #666;
+  }
+  
+  /* Contenu */
+  .container {
+    max-width: 800px;
+    margin: 100px auto;
+    padding: 20px;
+  }
+  
+  .container h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+
+  }
+  
+  .container h2 {
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .container h3 {
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .container h4 {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .container p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .container img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .container h4 + p {
+    margin-top: 0;
+  }
+  
+  .container ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .container ul li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .container ol {
+    list-style: decimal;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .container ol li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  .container blockquote {
+    font-size: 18px;
+    font-style: italic;
+    margin: 20px;
+    padding: 10px;
+    border-left: 5px solid #333;
+  }
+  
+  .container blockquote p {
+    margin: 0;
+  }
+  
+  .container form {
+    margin-top: 40px;
+  }
+  
+  .container label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .container input[type="text"], .container textarea {
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .container input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px
+  }
+body{
+    text-align: center;
+}
+
+.i1{
+    max-width: 100%;
+}
