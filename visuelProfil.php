@@ -73,7 +73,7 @@ if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) {
             <?php endif; ?>
             <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1){
                 $page="window.location='nouveauUtilSemaine.php?email=$email'";
-                echo "<button onclick=$page >Élire utilisateur de la semaine</button>";
+                echo "<button onclick=$page >Choisir comme utilisateur de la semaine</button>";
             }
 
 
@@ -88,7 +88,7 @@ if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) {
                 echo '<button onclick=' . $eff . '>Effacer</button>';
             }
 
-            include('recetteUtil.php');
+            // include('recetteUtil.php') ne fonctionne en même temps avec commentaireUtil.php;
             ?>
             <br><br>
             <?php include('commentaireUtil.php') ?>
