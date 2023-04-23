@@ -32,12 +32,11 @@
     </div>
     <div class="comments">
     <h1>Commentaires</h1>
-    <form method="post" action="traitement_tri.php">
+    <form method="post" action="afficher_commentaire.php">
         <label for="tri">Trier par :</label>
         <select id="tri" name="tri">
             <option value="date">Les + récents</option>
             <option value="note">Les mieux notés</option>
-            <option value="rien">Pas de filtre</option>
         </select>
         <button type="submit">Trier</button>
     </form>

@@ -21,8 +21,17 @@
         try{
             if (isset($_SESSION['recette_id'])) {
                 $recette_id = $_SESSION['recette_id'];
+                $tri = isset($_POST['tri']) ? $_POST['tri'] : 'date';
 
-                $statement=$dbco->prepare("SELECT commentaire_id, mail_auteur, commentaire, note, date_creation FROM commentaire WHERE recette_id=:recette_id");
+                // Construire la requête SQL pour récupérer les commentaires triés selon le paramètre 'tri'
+                if($tri=="note"){
+                    $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY note DESC";
+                }
+                else{
+                    $query = "SELECT * FROM commentaire WHERE recette_id = :recette_id ORDER BY date_creation DESC";
+                }
+
+                $statement=$dbco->prepare($query);
                 $statement->bindParam(':recette_id', $recette_id);
                 $statement->execute();
                 $commentaires=$statement->fetchAll(PDO::FETCH_ASSOC);
@@ -39,20 +48,6 @@
                     //echo "<button class='comment-delete' data-comment-id='" . $commentaire['commentaire_id'] . "'>Supprimer</button>";
                 }
             }
-            // Récupérer la valeur du paramètre 'tri' dans l'URL, ou utiliser la valeur par défaut 'date'
-        // $tri = isset($_GET['tri']) ? $_GET['tri'] : 'date';
-
-        // // Construire la requête SQL pour récupérer les commentaires triés selon le paramètre 'tri'
-        // switch ($tri) {
-        //     case 'note':
-        //         $query = "SELECT * FROM commentaire WHERE recette_id = $recette_id ORDER BY note DESC";
-        //         break;
-        //     case 'date':
-        //         $query = "SELECT * FROM commentaire WHERE recette_id = $recette_id ORDER BY date_creation DESC";
-        //         break;
-        //     default:
-        //         $query = "SELECT * FROM commentaire WHERE recette_id = $recette_id";
-        // }
 
         }
 
