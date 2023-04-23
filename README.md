@@ -15,7 +15,7 @@ Ensuite, il est préférable de s'inscrire à partir de l'onglet en début de pa
 ### Fonctionnalités principales
 - consultation de recettes
 - création de nouvelles recettes
-- recommandations personnalisés
+- recommandations personnalisées
 - possibilité de commenter/noter
 
 ### Participation
