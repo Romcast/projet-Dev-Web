@@ -1,37 +1,52 @@
-#notification {
+/* Style pour l'icône de notification */
+.notification-icon {
     position: relative;
-    display: inline-block;
-}
-
-#notification-icon {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-}
-
-#suggestions-list {
+  }
+  
+  .notification-icon::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    display: none;
+  }
+  
+  .notification-icon.new::after {
+    display: block;
+  }
+  
+  /* Style pour la liste de suggestions */
+  .notification-list {
     position: absolute;
     top: 40px;
-    right: -150px;
-    width: 300px;
+    right: 0;
     background-color: white;
-    border: 1px solid #ccc;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: none;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-#suggestions-list li {
-    display: flex;
-    align-items: center;
+    border: 1px solid black;
     padding: 10px;
+    display: none;
+    z-index: 9999;
+  }
+  
+  .notification-list.show {
+    display: block;
+  }
+  
+  .notification-list li {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .notification-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-#suggestions-list li img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+
+.notification-icon .new {
+	display: none;
 }
