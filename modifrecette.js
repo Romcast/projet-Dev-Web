@@ -1,8 +1,8 @@
+//cette fonction sert a ajouter la ligne d'input pour ajouter de nouveau ingredient a une recette deja existante
 function ajouterNouvelIngredient() {
   var ingredientCount = 1;
   var addButton = document.getElementById("ajouter_ingredient");
 
-  // Add event listener only if it hasn't been added before
   if (!addButton.hasAttribute("data-clicked")) {
     addButton.setAttribute("data-clicked", "true");
     addButton.addEventListener("click", ajouterIngredient);
@@ -15,13 +15,13 @@ function ajouterNouvelIngredient() {
     ingredientCount++;
   }
 }
-
+//Cette fonction sert a supprimer de nouveau ingredient affiché sur la page
 function supprimerNouvelIngredient(nouvingredient) {
 nouvingredient.parentNode.removeChild(nouvingredient);
 }
 
 
-
+//cette fonction permet de supprimer des ingredients de la base de donnee en restant sur la meme page
 function supprimerIngredient(id) {
   // Supprimer l'étape de la page
   var quantite = document.getElementById("modif_quantite" + id);
@@ -53,7 +53,7 @@ unite.parentNode.removeChild(unite);
 
 
 
-
+//Cette fonction sert a ajouter des input pour de nouvelle etapes sur la page
 function ajouterNouvelleEtape() {
   var etapeCount = 1;
   var addButton2 = document.getElementById("ajouter_etape");
@@ -71,13 +71,13 @@ function ajouterNouvelleEtape() {
   };
 }
 
-
+//cette fonction sert a supprimer les nouveau input present sur la page
 function supprimerNouvelleEtape(nouvetape) {
 nouvetape.parentNode.removeChild(nouvetape);
 }
 
 
-
+//cette fonction permet de suppriler les anciennes etapes present dans la bdd en restant sur la meme page
 function supprimerEtape(id) {
   // Supprimer l'étape de la page
   var etape = document.getElementById("modif_etape" + id);
