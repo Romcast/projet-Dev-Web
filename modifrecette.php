@@ -1,7 +1,7 @@
 <?php
 require('header.php');
     $servername ="localhost";
-    $username ="root";
+    $username ="root";.
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
 //on recupere les donnee existante pour cet id 
@@ -88,9 +88,9 @@ require('header.php');
             <!-- <label>Auteur de la recette</label><br>
             <input type="text" id="auteur" name="auteur"><br><br> -->
             <label>Nom de la recette</label><br>
-            <input type="text" id="nom" name="nom" value="<?=  $modifrecette['nom'] ?>"required><br><br>//Modification du nom de la recette
+            <input type="text" id="nom" name="nom" value="<?=  $modifrecette['nom'] ?>"required><br><br>
 
-            <label>Type de recette</label><br>//modif type recette
+            <label>Type de recette</label><br>
             <select id="type" name="type"  required>
                 <option>--------------</option>
                 <option value="Entrée" <?php if($modifrecette['type_repas']=="Entrée"){echo "selected"; }?>>Entrée</option>
@@ -98,17 +98,17 @@ require('header.php');
                 <option value="Dessert"<?php if($modifrecette['type_repas']=="Dessert"){ echo"selected";}?>>Dessert</option>
             </select><br><br>
 
-            <label>Nombre de personne</label><br>//modif nombre personne
+            <label>Nombre de personne</label><br>
             <input type="number" id="nb_personnes" name="nb_personnes" value="<?=  $modifrecette['nombre_personnes'] ?>"  required><br><br>
             
-            <label>Difficulté</label><br>//modif difficulté
+            <label>Difficulté</label><br>
             <select id="difficulte" name="difficulte" required>
                 <option>--------------</option>
                 <option value="Facile"<?php if($modifrecette['difficulte']=="Facile"){echo "selected"; }?>>Facile</option>
                 <option value="Moyenne"<?php if($modifrecette['difficulte']=="Moyenne"){echo "selected"; }?>>Moyenne</option>
                 <option value="Difficile"<?php if($modifrecette['difficulte']=="Difficile"){echo "selected"; }?>>Difficile</option>
             </select><br><br>
-            <label>Ingrédients:</label><br>//modif de la liste d'ingredient
+            <label>Ingrédients:</label><br>
 		    
             <?php if($modifingredient->rowCount()>0){
                 while($i=$modifingredient->fetch()){
@@ -195,7 +195,7 @@ require('header.php');
          </div><br>
          <button id="ajouter_ingredient" onclick="ajouterNouvelIngredient()" type="button">Ajouter ingredient</button><br><br>
             
-            <label>Phases techniques</label><br>//modif des phases technique
+            <label>Phases techniques</label><br>
 		    
             <?php if($modifetape->rowCount()>0){
                 while($e=$modifetape->fetch()){
@@ -241,7 +241,7 @@ require('header.php');
          </div><br>
          <button id="ajouter_etape" onclick="ajouterNouvelleEtape()" type="button">Ajouter étape</button><br><br>
             
-            <label>Dernier conseils du chef</label><br>// modif conseil du chef
+            <label>Dernier conseils du chef</label><br>
 		    <textarea id="conseils" name="conseils" class="text"><?=$modifrecette['conseils'] ?></textarea><br><br>
             <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg">
             <input type ="checkbox" id="suppr" name="suppr">
