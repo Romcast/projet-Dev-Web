@@ -16,7 +16,7 @@
                 <div class="recette_util_semaine ">
                         <label style="font-size:20">Meilleure recette :</label>
                         <?php if ($photo_recette != ""){
-                            echo '<img src=' . $photo_recette . 'alt="introuvable" width="50" height="50" >';
+                            echo '<img src="' . $photo_recette . '" alt="introuvable" width="50" height="50" >';
                             }
                         ?>
                             <div class="description_util_semaine"> 

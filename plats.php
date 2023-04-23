@@ -21,8 +21,8 @@
                     while($r=$nouvellerecette->fetch()){
                         ?>
                       <div class="recette">
-                            <img src="<?php echo isset($r['image']) ? $r['image'] : ''; ?>" alt="Image de la recette">
-                            <p><a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a><?php echo " "; echo $r['auteur']?></p>
+                            <img src="<?php echo isset($r['photo']) ? $r['photo'] : ''; ?>" alt="Image de la recette" height='50' width ='50'>
+                            <a href="visuelrecette.php?id=<?php echo $r['id']?>"><?php echo $r['nom'];?></a><?php echo " "; echo $r['auteur']?>
                         </div>
                         <?php
                     }
