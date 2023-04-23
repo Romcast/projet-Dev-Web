@@ -1,3 +1,10 @@
+<html>
+    <head>       
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="notificationpage.css" rel="stylesheet" type="text/css">
+</head>
+</html>
 <?php
 require('header.php');
 $servername ="localhost";
@@ -64,17 +71,25 @@ if(isset($_SESSION['email'])){
     // Affichage des suggestions
     if (!empty($recettes)) {
         echo "<h2>Suggestions de la semaine :</h2>";
+        echo"<body>";
         echo "<ul>";
         foreach ($recettes as $recette) {
             echo "<li>" . $recette['nom'] . " (" . $recette['type_repas'] . ") de " . $recette['auteur'] . "</li>";
         }
         echo "</ul>";
+        echo"</body>";
     } else {
+        echo"<body>";
         echo "<p>Aucune suggestion pour cette semaine.</p>";
+        echo"</body>";
     }
 }
 else{
-    echo "Connectez-vous pour recevoir des notifications !";
+    echo"<body>";
+    echo "<div class='erreur'>Connectez-vous pour recevoir des notifications !</div>";
+    echo"</body>";
 }
 ?>
+
+
 
