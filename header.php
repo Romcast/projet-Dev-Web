@@ -69,7 +69,7 @@ if(!isset($_SESSION)){
                         echo" ";
                         echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
                         echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
-                        echo "<button onclick=\"window.location='listerecette.php'\">Liste des recettes</button>";
+                        echo "<button onclick=\"window.location='listerecetteVALIDE.php'\">Liste des recettes</button>";
                         echo" ";
                     }
                     
