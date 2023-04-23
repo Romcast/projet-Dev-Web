@@ -1,120 +1,93 @@
-let boutonAjouterIngredient = document.getElementById("ajouter_ingredient");
-let champNouvelIngredient = document.getElementById("nouvel_ingredient");
-let champQuantite = document.getElementById("quantite");
-let champUnite = document.getElementById("unite");
-let listeIngredients = document.getElementById("ingredients");
+function ajouterNouvelIngredient() {
+  var ingredientCount = 1;
+  var addButton = document.getElementById("ajouter_ingredient");
+
+  // Add event listener only if it hasn't been added before
+  if (!addButton.hasAttribute("data-clicked")) {
+    addButton.setAttribute("data-clicked", "true");
+    addButton.addEventListener("click", ajouterIngredient);
+  }
+
+  function ajouterIngredient() {
+    var div = document.createElement("div");
+    div.innerHTML ='<input type="number" id="nouvelle_quantite' + ingredientCount + '" name="nouvelle_quantite[]"><select id="nouvelle_unite' + ingredientCount + '" name="nouvelle_unite[]"><option> </option><option>L</option><option>mL</option><option>cL</option><option>g</option><option>kg</option><option>pincée</option><option>c-à-c</option><option>c-à-s</option></select><input type="text" id="nouveau_nom' + ingredientCount + '" name="nouveau_nom[]"><button id="annuler_ingredient" type="button" onclick="supprimerNouvelIngredient(this.parentNode)">-</button><br><br><br><br>';
+    document.getElementById("ingredients").appendChild(div);
+    ingredientCount++;
+  }
+}
+
+function supprimerNouvelIngredient(nouvingredient) {
+nouvingredient.parentNode.removeChild(nouvingredient);
+}
 
 
-//ingredient sous forme d'input
-boutonAjouterIngredient.addEventListener("click", function() {
-	var ingredient = champNouvelIngredient.value;
-  var quantite=champQuantite.value;
-  var unite=champUnite.value;
+
+function supprimerIngredient(id) {
+  // Supprimer l'étape de la page
+  var quantite = document.getElementById("modif_quantite" + id);
+  var unite=document.getElementById("modif_unite" + id);
+  var nom = document.getElementById("modif_nom" + id);
+
+  quantite.parentNode.removeChild(quantite);
+  while (unite.firstChild) {
+    unite.removeChild(unite.firstChild);
+}
+unite.parentNode.removeChild(unite);
+  nom.parentNode.removeChild(nom);
   
-	if (ingredient && quantite) {
-    var nouvelIngredient=document.createElement("input");
-    nouvelIngredient.name="nouvelIngredient[]";
-    nouvelIngredient.value=ingredient;
-
-
-		var nouvelleQuantite = document.createElement("input");
-    nouvelleQuantite.type="number";
-    nouvelleQuantite.name="nouvelleQuantite[]";
-    nouvelleQuantite.value=quantite;
-
-    var nouvelleUnite= document.createElement("select");
-    nouvelleUnite.name="nouvelleUnite[]";
-    nouvelleUnite.value = unite;
-    
-
-    var sansUnite=document.createElement("option");
-    sansUnite.value=" ";
-    sansUnite.text=" ";
-
-    var L=document.createElement("option");
-    L.value="L";
-    L.text="L";
-
-    var mL=document.createElement("option");
-    mL.value="mL";
-    mL.text="mL";
-
-    var cL=document.createElement("option");
-    cL.value="cL";
-    cL.text="cL";
-
-    var g=document.createElement("option");
-    g.value="g";
-    g.text="g";
-
-    var kg=document.createElement("option");
-    kg.value="kg";
-    kg.text="kg";
-
-    var pincee=document.createElement("option");
-    pincee.value="pincée";
-    pincee.text="pincée";
-
-    var cac=document.createElement("option");
-    cac.value="c-à-c";
-    cac.text="c-à-c";
-
-    var cas=document.createElement("option");
-    cas.value="c-à-s";
-    cas.text="c-à-s";
-
-    nouvelleUnite.appendChild(sansUnite);
-    nouvelleUnite.appendChild(mL);
-    nouvelleUnite.appendChild(L);
-    nouvelleUnite.appendChild(cL);
-    nouvelleUnite.appendChild(g);
-    nouvelleUnite.appendChild(kg);
-    nouvelleUnite.appendChild(pincee);
-    nouvelleUnite.appendChild(cac);
-    nouvelleUnite.appendChild(cas);
-
-
-
-		listeIngredients.appendChild(nouvelleQuantite);
-    listeIngredients.appendChild(nouvelleUnite);
-    listeIngredients.appendChild(nouvelIngredient);
-    
-    
-		champNouvelIngredient.value = "";
-    champUnite.value="";
-    champQuantite.value="";
-
   
-  var bouton_text= document.createTextNode("-");
-  var retourLigne=document.createElement("br");
-  listeIngredients.appendChild(retourLigne);
+  // Supprimer l'ingredient de la base de données
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        console.log(httpRequest.responseText);
+      } else {
+        console.log('Il y a eu un problème avec la requête.');
+      }
+    }
+  };
+  httpRequest.open('DELETE', 'deleteingredient.php?delete=' + id);
+  httpRequest.send();
+}
 
-	}
-  //creation du bouton pour supprimer l'élément de la liste
+
+
+
+function ajouterNouvelleEtape() {
+  var etapeCount = 1;
+  document.getElementById("ajouter_etape").addEventListener("click", function() {
+    var div = document.createElement("div");
+    div.innerHTML = '<input type="text" id="nouvelle_etape_' + etapeCount + '" name="nouvelle_etape[]"><button id="annuler_etape" type="button" onclick="supprimerNouvelleEtape(this.parentNode)">-</button><br><br><br><br>';
+    document.getElementById("etapes").appendChild(div);
+    etapeCount++;
+  });
+}
+
+
+function supprimerNouvelleEtape(nouvetape) {
+nouvetape.parentNode.removeChild(nouvetape);
+}
+
+
+
+function supprimerEtape(id) {
+  // Supprimer l'étape de la page
+  var etape = document.getElementById("modif_etape" + id);
+  etape.parentNode.removeChild(etape);
   
-  //fonction pour faire fonctionner boutonSuppression
-});
-let boutonAjouterEtape = document.getElementById("ajouter_etape");
-let champNouvelleEtape = document.getElementById("nouvelle_etape");
-let listeEtapes = document.getElementById("etapes");
-
-
-boutonAjouterEtape.addEventListener("click", function() {
-	var etape = champNouvelleEtape.value;
-	if (etape) {
-		var nouvelleEtape = document.createElement("input");
-    nouvelleEtape.name="nouvelleEtape[]";
-    //nouvelleEtape.value=etape;
-
-		var retourLigne=document.createElement("br");
-		listeEtapes.appendChild(nouvelleEtape);
-    listeEtapes.appendChild(retourLigne);
-		champNouvelleEtape.value = "";
-	}
-
-  
-
-});
-
-
+  // Supprimer l'étape de la base de données
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        console.log(httpRequest.responseText);
+      } else {
+        console.log('Il y a eu un problème avec la requête.');
+      }
+    }
+  };
+  httpRequest.open('DELETE', 'deleteetape.php?delete=' + id);
+  httpRequest.send();
+}
 

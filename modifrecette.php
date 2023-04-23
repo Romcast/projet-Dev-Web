@@ -14,15 +14,15 @@ require('header.php');
 
        $modifetape = $bdd->prepare('SELECT * FROM form_etape WHERE recette_id = ?');
 	   $modifetape->execute(array($modif_id));
-	   
+
        if($modifrecette->rowCount() == 1) {
 	      $modifrecette = $modifrecette->fetch();
 	   } else {
 	      die('Erreur : la recette n\'existe pas...');
 	   }
 	}
-	if(isset($_POST['nom'], $_POST['type'],$_POST['nb_personnes'],$_POST['difficulte'],$_POST['conseils'], $_POST['nouvelleEtape'])) {
-	   if(!empty($_POST['nom']) AND !empty($_POST['type']) AND !empty($_POST['nb_personnes']) AND !empty($_POST['difficulte'] AND !empty($_POST['conseils']) AND !empty($_POST['nouvelleEtape']))) {
+	if(isset($_POST['nom'], $_POST['type'],$_POST['nb_personnes'],$_POST['difficulte'],$_POST['conseils'])) {
+	   if(!empty($_POST['nom']) AND !empty($_POST['type']) AND !empty($_POST['nb_personnes']) AND !empty($_POST['difficulte'] AND !empty($_POST['conseils']))) {
 	      
         $nom = $_POST['nom'];
         $type= $_POST['type'];
@@ -31,16 +31,9 @@ require('header.php');
         //$nouvelleQuantite= $_POST['nouvelleQuantite'];
         //$nouvelleUnite=$_POST['nouvelleUnite'];
         //$nouvelIngredient=$_POST['nouvelIngredient'];
-        $nouvelleEtape=$_POST['nouvelleEtape'];
         $conseil = $_POST['conseils'];
 	    $update = $bdd->prepare('UPDATE form_recette SET nom = ?, type_repas = ?, nombre_personnes = ?, difficulte=?, conseils=? WHERE id = ?');
 	    $update->execute(array($nom, $type,$nombre,$difficulte,$conseil, $modif_id));
-        foreach ($nouvelleEtape as $etape ){
-            $entree_etape="INSERT INTO form_etape( etape, recette_id)
-            VALUES('$etape', $modif_id )";
-            $bdd->exec($entree_etape);
-            
-        }
 	    $message = 'Votre article a bien été mis à jour !';
         //header('Location :visuelrecette.php?id='.$modif_id);
 	      
@@ -108,6 +101,7 @@ require('header.php');
 	<head>
 	   <title>Edition</title>
 	   <meta charset="utf-8">
+       <script src="modifrecette.js"></script>
 	</head>
     <body>
         <form  method="post" enctype="multipart/form-data" >
@@ -135,52 +129,138 @@ require('header.php');
                 <option value="Difficile"<?php if($modifrecette['difficulte']=="Difficile"){echo "selected"; }?>>Difficile</option>
             </select><br><br>
             <label>Ingrédients:</label><br>
-                    <div id="ingredients" name="ingredients[]" >
-                        
-                        
-                    </div><br>
+		    
             <?php if($modifingredient->rowCount()>0){
                 while($i=$modifingredient->fetch()){
-
                 ?>
-                    
-                   
-                    <input type="number" id="quantite" name="quantite" value="<?=  $i['quantite'] ?>" placeholder="quantité" >
-                    <select id="unite" name="unite">
-                        <option> </option>
-                        <option <?php if($i['unite']=="L"){echo "selected"; }?>>L</option>
-                        <option <?php if($i['unite']=="mL"){echo "selected"; }?>>mL</option>
-                        <option <?php if($i['unite']=="cL"){echo "selected"; }?>>cL</option>
-                        <option <?php if($i['unite']=="g"){echo "selected"; }?>>g</option>
-                        <option <?php if($i['unite']=="kg"){echo "selected"; }?>>kg</option>
-                        <option <?php if($i['unite']=="pincée"){echo "selected"; }?>>pincée</option>
-                        <option <?php if($i['unite']=="c-à-c"){echo "selected"; }?>>c-à-c</option>
-                        <option <?php if($i['unite']=="c-à-s"){echo "selected"; }?>>c-à-s</option>
-                    </select>
-                    <input type="text" id="nouvel_ingredient" name="nouvel_ingredient" value="<?=  $i['nom'] ?>" placeholder="ingrédient"><br><br>
-
-                    
-                    <!-- <button id="supprimer_dernier_ingredient">Supprimer dernier ingrédient</button><br><br> -->
+            <div >
+            <input type="number" id=<?='"modif_quantite'.$i['id'].'"'?> name=<?='"modif_quantite'.$i['id'].'"'?> value="<?=  $i['quantite'] ?>" placeholder="quantité" >
+            <select id=<?='"modif_unite'.$i['id'].'"'?> name=<?='"modif_unite'.$i['id'].'"'?>>
+                    <option> </option>
+                    <option <?php if($i['unite']=="L"){echo "selected"; }?>>L</option>
+                    <option <?php if($i['unite']=="mL"){echo "selected"; }?>>mL</option>
+                    <option <?php if($i['unite']=="cL"){echo "selected"; }?>>cL</option>
+                    <option <?php if($i['unite']=="g"){echo "selected"; }?>>g</option>
+                    <option <?php if($i['unite']=="kg"){echo "selected"; }?>>kg</option>
+                    <option <?php if($i['unite']=="pincée"){echo "selected"; }?>>pincée</option>
+                    <option <?php if($i['unite']=="c-à-c"){echo "selected"; }?>>c-à-c</option>
+                    <option <?php if($i['unite']=="c-à-s"){echo "selected"; }?>>c-à-s</option>
+            </select>
+            <input type="text" id=<?='"modif_nom'.$i['id'].'"'?> name=<?='"modif_nom'.$i['id'].'"'?> value="<?=  $i['nom'] ?>" placeholder="ingrédient">
+           <button type="button" onclick="supprimerIngredient(<?php echo $i['id'] ?>)">-</button>
+            </div><br>
+           <?php 
+            if(isset($_POST['modif_quantite'.$i['id']])) {
+            if(!empty($_POST['modif_quantite'.$i['id']])) {
+               $mQuantite=$_POST['modif_quantite'.$i['id']];
+               $entree_quantite=$bdd->prepare('UPDATE form_ingredient SET quantite=? WHERE id=?');
+               $entree_quantite->execute(array($mQuantite, $i['id']));
+               $message = 'Votre article a bien été mis à jour !';
+            }else {
+	         $message = 'Veuillez remplir tous les champs';
+	         }
+            }
+            if(isset($_POST['modif_unite'.$i['id']])) {
+                if(!empty($_POST['modif_unite'.$i['id']])) {
+                   $mUnite=$_POST['modif_unite'.$i['id']];
+                   $entree_unite=$bdd->prepare('UPDATE form_ingredient SET unite=? WHERE id=?');
+                   $entree_unite->execute(array($mUnite, $i['id']));
+                   $message = 'Votre article a bien été mis à jour !';
+                }else {
+                 $message = 'Veuillez remplir tous les champs';
+                 }
+            }
+            if(isset($_POST['modif_nom'.$i['id']])) {
+                if(!empty($_POST['modif_nom'.$i['id']])) {
+                    $mNom=$_POST['modif_nom'.$i['id']];
+                    $entree_nom=$bdd->prepare('UPDATE form_ingredient SET nom=? WHERE id=?');
+                    $entree_nom->execute(array($mNom, $i['id']));
+                    $message = 'Votre article a bien été mis à jour !';
+                }else {
+                    $message = 'Veuillez remplir tous les champs';
+                }
+            }
+            if(isset($_POST['supprimer_ingredient'.$i['id']])) {
+               $supprimer_ingredient=$bdd->prepare('DELETE FROM form_ingredient WHERE id=?');
+               $supprimer_ingredient->execute(array($i['id']));
+               $message = 'L\'ingredient a bien été supprimée !';
+           }
+         }}
+         if(isset($_POST['nouveau_nom'],$_POST['nouvelle_quantite'],$_POST['nouvelle_unite'])){
+            if(!empty($_POST['nouveau_nom']) AND !empty($_POST['nouvelle_quantite']) AND !empty($_POST['nouvelle_unite'])){
+                $nouveauNom=$_POST['nouveau_nom'];
+                $nouvelleQuantite=$_POST['nouvelle_quantite'];
+                $nouvelleUnite=$_POST['nouvelle_quantite'];
+                if (is_array($nouveauNom) && is_array($nouvelleQuantite) && is_array($nouvelleUnite)) {
+                    foreach ($nouveauNom as $key => $ingredient) {
+                        $quantite = $nouvelleQuantite[$key];
+                        $unite = $nouvelleUnite[$key];
+                        $entree_ingredient="INSERT INTO form_ingredient(nom, quantite, unite, recette_id) VALUES('$ingredient','$quantite','$unite', $modif_id)";
+                        $bdd->exec($entree_ingredient);
+                    }  
+                } else {
+                    if (is_array($nouvelleUnite)) {
+                        $nouvelleUnite = $nouvelleUnite[0];
+                    }
+                    $entree_ingredient="INSERT INTO form_ingredient(nom, quantite, unite, recette_id) VALUES('$nouveauNom','$nouvelleQuantite','$nouvelleUnite', $modif_id)";
+                    $bdd->exec($entree_ingredient);
+                }
+            }
             
-           <?php }}?>
-                 <button id="ajouter_ingredient" type="button">Ajouter ingrédient</button><br><br>
+         }
+         
+         ?>
+         <div id="ingredients">
                 
+         </div><br>
+         <button id="ajouter_ingredient" onclick="ajouterNouvelIngredient()" type="button">Ajouter ingredient</button><br><br>
+            
             <label>Phases techniques</label><br>
 		    
             <?php if($modifetape->rowCount()>0){
                 while($e=$modifetape->fetch()){
-
                 ?>
-            <input type="text" value="<?=  $e['etape'] ?>" name="nouvelle_etape">
-            
-            <button id="supprimer_derniere_etape">Supprimer</button><br><br>
-            <?php }}?>
-            <input type="text" id="nouvelle_etape" name="nouvelle_etape">
-            <button id="ajouter_etape" type="button">Ajouter étape</button><br><br>
-
-            <div id="etapes" name="etapes[]">
-                
+            <div >
+               <input type="text" value="<?=  $e['etape'] ?>" id=<?='"modif_etape'.$e['id'].'"'?> name=<?='"modif_etape'.$e['id'].'"'?>>
+               <button type="button" onclick="supprimerEtape(<?php echo $e['id'] ?>)">-</button>
             </div><br>
+           <?php 
+            if(isset($_POST['modif_etape'.$e['id']])) {
+            if(!empty($_POST['modif_etape'.$e['id']])) {
+               $mEtape=$_POST['modif_etape'.$e['id']];
+               $entree_etape=$bdd->prepare('UPDATE form_etape SET etape=? WHERE id=?');
+               $entree_etape->execute(array($mEtape, $e['id']));
+               $message = 'Votre article a bien été mis à jour !';
+            }else {
+	         $message = 'Veuillez remplir tous les champs';
+	         }
+            }
+            if(isset($_POST['supprimer_etape'.$e['id']])) {
+               $supprimer_etape=$bdd->prepare('DELETE FROM form_etape WHERE id=?');
+               $supprimer_etape->execute(array($e['id']));
+               $message = 'L\'étape a bien été supprimée !';
+           }
+         }}
+         if(isset($_POST['nouvelle_etape']) AND !empty($_POST['nouvelle_etape']) ){
+            $nouvelleEtape=$_POST['nouvelle_etape'];
+            if (is_array($nouvelleEtape)) {
+            foreach ($nouvelleEtape as $etape ){
+            $entree_etape="INSERT INTO form_etape( etape, recette_id)
+            VALUES('$etape', $modif_id )";
+            $bdd->exec($entree_etape);
+            }
+         }else{
+            $entree_etape="INSERT INTO form_etape( etape, recette_id)
+            VALUES('$nouvelleEtape', $modif_id )";
+            $bdd->exec($entree_etape);
+          }}
+         
+         ?>
+         <div id="etapes">
+                
+         </div><br>
+         <button id="ajouter_etape" onclick="ajouterNouvelleEtape()" type="button">Ajouter étape</button><br><br>
+            
             <label>Dernier conseils du chef</label><br>
 		    <textarea id="conseils" name="conseils" class="text"><?=$modifrecette['conseils'] ?></textarea><br><br>
             <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg"><br><br>
@@ -188,7 +268,6 @@ require('header.php');
             
             
         </form>
-        <script src="modifrecette.js"></script>
         <?php if(isset($message)) { echo $message; } ?>
 	</body>
 	</html>
