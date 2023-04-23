@@ -5,7 +5,7 @@ function ajouterNouvelIngredient() {
   // Add event listener only if it hasn't been added before
   if (!addButton.hasAttribute("data-clicked")) {
     addButton.setAttribute("data-clicked", "true");
-    addButton.addEventListener("click", ajouterIngredient());
+    addButton.addEventListener("click", ajouterIngredient);
   }
 
   function ajouterIngredient() {
@@ -56,12 +56,19 @@ unite.parentNode.removeChild(unite);
 
 function ajouterNouvelleEtape() {
   var etapeCount = 1;
-  document.getElementById("ajouter_etape").addEventListener("click", function() {
+  var addButton2 = document.getElementById("ajouter_etape");
+  if (!addButton2.hasAttribute("data-clicked")) {
+    addButton2.setAttribute("data-clicked", "true");
+    addButton2.addEventListener("click", ajouterEtape);
+  }
+  
+
+  function ajouterEtape(){
     var div = document.createElement("div");
     div.innerHTML = '<input type="text" id="nouvelle_etape_' + etapeCount + '" name="nouvelle_etape[]"><button id="annuler_etape" type="button" onclick="supprimerNouvelleEtape(this.parentNode)">-</button><br><br><br><br>';
     document.getElementById("etapes").appendChild(div);
     etapeCount++;
-  });
+  };
 }
 
 

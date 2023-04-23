@@ -171,7 +171,7 @@ require('header.php');
             if(!empty($_POST['nouveau_nom']) AND !empty($_POST['nouvelle_quantite']) AND !empty($_POST['nouvelle_unite'])){
                 $nouveauNom=$_POST['nouveau_nom'];
                 $nouvelleQuantite=$_POST['nouvelle_quantite'];
-                $nouvelleUnite=$_POST['nouvelle_quantite'];
+                $nouvelleUnite=$_POST['nouvelle_unite'];
                 if (is_array($nouveauNom) && is_array($nouvelleQuantite) && is_array($nouvelleUnite)) {
                     foreach ($nouveauNom as $key => $ingredient) {
                         $quantite = $nouvelleQuantite[$key];
