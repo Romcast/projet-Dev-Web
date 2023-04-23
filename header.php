@@ -59,11 +59,20 @@ if(!isset($_SESSION)){
                         echo" ";
                         echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
                         echo" ";
+                        echo "<button onclick=\"window.location='listebanni.php'\">Liste banni</button>"; 
+                        echo" ";
+                        echo "<button onclick=\"window.location='listeutilisateur.php'\">Liste utilisateurs</button>"; 
+                        echo" ";
                         echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
                     }elseif(isset($_SESSION['administrateur']) AND $_SESSION['administrateur']==0){
+                        echo "<button onclick=\"window.location='listeutilisateur.php'\">Liste utilisateurs</button>"; 
+                        echo" ";
                         echo "<button onclick=\"window.location='nouvellerecette.php'\">Nouvelle Recette</button>";
                         echo "<button onclick=\"window.location='recettepref.php'\">Recette préférée</button>";
+                        echo "<button onclick=\"window.location='listerecette.php'\">Liste des recettes</button>";
+                        echo" ";
                     }
+                    
                     
                     ?>
                 </div>
