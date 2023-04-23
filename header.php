@@ -11,6 +11,7 @@ if(!isset($_SESSION)){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="header.css" rel="stylesheet" type="text/css">
         <link href="site.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
     </head>
 
@@ -22,6 +23,9 @@ if(!isset($_SESSION)){
        ?> 
         <nav class="title">
             <h1 onclick="window.location='home.php'">Miam</h1>
+            <a href="notification.php" class="notification-icon">
+        <img class="normal" src="notification-icon.png" alt="Icone de notification normale">
+        </a>
             <div class="onglets">
                 <div class="menu">
                  <label class="titre">Catégories</label>
