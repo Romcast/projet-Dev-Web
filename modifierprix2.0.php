@@ -1,4 +1,4 @@
-<?php
+<?php// cette page sert a la modification du prix
     require('header.php');
     $servername ="localhost";
     $username ="root";
@@ -6,7 +6,7 @@
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
     if(isset($_GET['modif']) AND !empty($_GET['modif'])){
         $modif_id=$_GET['modif'];
-        $modif=$bdd->prepare('SELECT * FROM form_ingredient WHERE id= ?');
+        $modif=$bdd->prepare('SELECT * FROM form_ingredient WHERE id= ?');//on recupere l'ingredient
         $modif->execute(array($modif_id));
         
         if($modif->rowCount() == 1) {
@@ -24,10 +24,10 @@
     }
     if(isset($_POST['prix']) AND !empty($_POST['prix'])){
             $prix=$_POST['prix'];
-            $update = $bdd->prepare('UPDATE form_ingredient SET cout=? WHERE nom=? AND unite=?');
+            $update = $bdd->prepare('UPDATE form_ingredient SET cout=? WHERE nom=? AND unite=?');//on met a jour tout les ingredients qui ont le meme prix et la meme unite
             $update->execute(array($prix,$modif['nom'],$modif['unite']));
             $message = 'Le prix de l\'ingrédient a bien été mis à jour !';
-            $update_recette = $bdd->prepare('UPDATE form_recette SET cout_recette=? WHERE id=?');
+            $update_recette = $bdd->prepare('UPDATE form_recette SET cout_recette=? WHERE id=?');//on met egalement a jour la recette
             $cout_recette=$mise_a_jour_cout_recette['cout_recette']+$prix*$modif['quantite'];
             $update_recette->execute(array($cout_recette,$modif['recette_id'])); 
        //header('Location:liste_ingredient_cout.php');
