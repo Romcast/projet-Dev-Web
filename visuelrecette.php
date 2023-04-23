@@ -4,7 +4,8 @@
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
-    if(isset($_GET['id']) AND !empty($_GET['id'])){
+//on recupere toute les données dans les bases de donnee pour pouvoir les afficher par la suite
+    if(isset($_GET['id']) AND !empty($_GET['id'])){//on recupere l'identifiant de la recette
         $id=$_GET['id'];
         $vrecette= $bdd->prepare('SELECT * FROM form_recette WHERE id=?');
         $vingredients=$bdd->prepare('SELECT * FROM form_ingredient WHERE recette_id=?');
@@ -60,6 +61,7 @@
                         echo " ";echo $i['unite'];
                         echo " ";
                         echo $i['nom'];
+                        //on verifie que tout les ingredients ont un prix
                         if($i['cout']==""){
                             $encours_d_estimation=1;
                             echo " prix à estimer";
