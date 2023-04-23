@@ -4,7 +4,7 @@
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
-    $nouvellerecette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé"');
+    $nouvellerecette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Validé"'); //cette requete va permettre de trier les recette validé par l'admin et donc visible par les utilisateur et inversement
 ?>
 
 <html>
