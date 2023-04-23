@@ -56,7 +56,7 @@
               nom VARCHAR(50) NOT NULL,
               quantite INT NOT NULL,
               unite VARCHAR(10) ,
-              cout INT,
+              cout FLOAT,
               recette_id iNT UNSIGNED,
               FOREIGN KEY(id) REFERENCES form_recette(id) ON DELETE CASCADE
               )";
