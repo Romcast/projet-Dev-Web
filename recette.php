@@ -32,7 +32,7 @@
             nombre_personnes INT NOT NULL,
             difficulte VARCHAR(20) NOT NULL,
             conseils VARCHAR(500),
-            photo VARCHAR(20),
+            photo VARCHAR(100) DEFAULT 'image/recette.png',
             traitement VARCHAR(500) NOT NULL,
             note FLOAT,
             cout_recette FLOAT NOT NULL )";
@@ -57,6 +57,9 @@
                     if(move_uploaded_file($chemin_fichier, 'image/' . $id_recette)) {
                             $photo = 'image/' . $id_recette;
                             echo 'voici le chemin de la photo: '.$photo;
+
+                            $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $id_recette;";
+                            $dbco->exec($ajout_photo_bdd);
                             
                     } 
                     else {
@@ -71,8 +74,6 @@
             echo " photo introuvable; ";
         }
 
-        $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $id_recette;";
-        $dbco->exec($ajout_photo_bdd);
 
         $form_ingredient=  "CREATE TABLE IF NOT EXISTS form_ingredient(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,

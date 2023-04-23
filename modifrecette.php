@@ -41,57 +41,38 @@ require('header.php');
 	      $message = 'Veuillez remplir tous les champs';
 	   }
 	}
-    if($modifrecette['photo']!=""){
-        if(isset($_FILES['photo'])AND $_FILES['photo']['size']!=0){
-            if ($_FILES['photo']['size'] <= 1000000)
-            {
-                unlink('image/' . $modif_id);
-                //$nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
-                $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
-        
-                if(move_uploaded_file($chemin_fichier, 'image/' . $modif_id)) {
-                        $photo = 'image/' . $modif_id;
-                        echo 'voici le chemin de la photo: '.$photo;
-                        
-                } 
-                else {
-                $photo = 'erreur deplacement';
-                }
-            $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $modif_id;";
-            $bdd->exec($ajout_photo_bdd);         
-            }
-            else{
-                echo "erreur taille";
-            }  
+    
+    if (isset($_POST['suppr'])){
+        if (basename($modifrecette['photo']) !== "recette.png"){
+            unlink($modifrecette['photo']);
+          }
+        $photo = 'image/recette.png';
+        $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $modif_id;";
+        $bdd->exec($ajout_photo_bdd);
+    }
+    elseif(isset($_FILES['photo']) AND $_FILES['photo']['size']!=0){
+        if ($_FILES['photo']['size'] <= 1000000)
+        {
+            if (basename($modifrecette['photo']) !== "recette.png"){
+                unlink($modifrecette['photo']);
+              }
+            //$nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
+            $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
 
-        }else{
-            echo "PAS changement photo";
+                                                                                    
+            if(move_uploaded_file($chemin_fichier, 'image/' . $modif_id)) {
+                    $photo = 'image/' . $modif_id;
+                    echo 'voici le chemin de la photo: '.$photo;
+                    
+            } 
+            else {
+            $photo = 'erreur deplacement';
+            }
+        $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $modif_id;";
+        $bdd->exec($ajout_photo_bdd);         
         }
-        echo "PHOTO";
-        
-    }else{
-        echo "PAS PHOTO";
-        if(isset($_FILES['photo']) AND $_FILES['photo']['size']!=0){
-             if ($_FILES['photo']['size'] <= 1000000)
-                {
-                    //$nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
-                    $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
-            
-                    if(move_uploaded_file($chemin_fichier, 'image/' . $modif_id)) {
-                            $photo = 'image/' . $modif_id;
-                            echo 'voici le chemin de la photo: '.$photo;
-                            
-                    } 
-                    else {
-                    $photo = 'erreur deplacement';
-                    }
-                $ajout_photo_bdd="UPDATE form_recette SET photo = '$photo' WHERE id = $modif_id;";
-                $bdd->exec($ajout_photo_bdd);         
-                }
-                else{
-                    echo "erreur taille";
-                }
-            echo "changement photo";
+        else{
+            echo "erreur taille";
         }
     }
 
@@ -263,7 +244,9 @@ require('header.php');
             
             <label>Dernier conseils du chef</label><br>
 		    <textarea id="conseils" name="conseils" class="text"><?=$modifrecette['conseils'] ?></textarea><br><br>
-            <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg"><br><br>
+            <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg">
+            <input type ="checkbox" id="suppr" name="suppr">
+            <label for="suppr">Supprimer</label><br><br>
             <button type="submit">Enregistrer la recette</button><br><br>
             
             
