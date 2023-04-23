@@ -30,7 +30,7 @@
 </div>
 
     <script>
-    function filtre() {
+    function filtre_c() {
         var input, filter, ul, li, a, i, txtValue,inputChoix,k;
         input = document.getElementById("myInput_commentaire");
         inputChoix = document.getElementById("choix_commentaire");
@@ -66,7 +66,7 @@
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("liste_commentaire").innerHTML = this.responseText;
-            filtre();
+            filtre_c();
             }
         };
         var email = "<?php echo $email?>";

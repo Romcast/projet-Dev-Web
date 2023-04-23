@@ -33,7 +33,7 @@
 </div>
 
     <script>
-    function filtre() {
+    function filtre_r() {
         var input, filter, ul, li, a, i, txtValue;
         input = document.getElementById("myInput");
         
@@ -56,7 +56,7 @@
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("liste").innerHTML = this.responseText;
-            filtre();
+            filtre_r();
             }
         };
         var email = "<?php echo $email?>";
