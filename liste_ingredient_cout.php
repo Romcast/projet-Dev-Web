@@ -4,8 +4,10 @@ $servername ="localhost";
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
+//on va recuperer les nouveau ingredients qui n'ont pas de cout pour leur attribuer un cout en fonction de leurs noms et unité 
     $ingredient_non_estime=$bdd->query('SELECT DISTINCT * FROM form_ingredient WHERE cout IS NULL GROUP BY nom, unite
     HAVING COUNT(DISTINCT nom) = 1 AND COUNT(DISTINCT unite) = 1');
+//on va recuperer les ancien ingredients qui ont un cout pour modifier leur cout si necessaire
     $ingredient=$bdd->query('SELECT DISTINCT * FROM form_ingredient WHERE cout IS NOT NULL GROUP BY nom, unite
     HAVING COUNT(DISTINCT nom) = 1 AND COUNT(DISTINCT unite) = 1');
 ?>
