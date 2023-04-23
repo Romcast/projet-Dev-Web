@@ -34,7 +34,7 @@ try {
     if (!$result) {
         echo "Une erreur s'est produite lors de l'exécution de la requête.";
     }
-
+    //on calcule les moyennes à chaque nouveau commentaire
     $moyenne_note_query_recette = $dbco->query("SELECT AVG(note) FROM commentaire WHERE recette_id = $recette_id");
     $moyenne_note_recette = $moyenne_note_query_recette->fetchColumn();
     $update_note_recette = "UPDATE form_recette SET note = $moyenne_note_recette WHERE id = $recette_id";
