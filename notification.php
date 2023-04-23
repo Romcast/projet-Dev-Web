@@ -74,7 +74,7 @@ if(isset($_SESSION['email'])){
     }
 }
 else{
-    echo "Erreur";
+    echo "Connectez-vous pour recevoir des notifications !";
 }
 ?>
 
