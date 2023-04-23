@@ -67,7 +67,8 @@
 		    <textarea id="conseils" name="conseils" class="text"></textarea><br><br>
             <label> photo (jpeg/png/jpg)</label><br>
             <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg"><br><br>
-            <button type="submit" onclick="return nonVide()">Enregistrer la recette</button><br><br>
+            <button type="submit" onclick="return nonVide()">Enregistrer la recette</button><br>
+	    <a href="home.php" class="lien-bouton">Retour</a>
             
 
             
