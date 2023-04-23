@@ -41,6 +41,7 @@
     <head>
         <meta charset="utf-8">
         <title> RECETTE : <?php echo $titre;?> </title>
+        <link href="recette.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <h1> RECETTE :<?php echo $titre;?> </h1>
