@@ -9,13 +9,13 @@
 
     <h2>Commentaires de l'utilisateur</h2>
     
-    <select id="choix_commentaire" size="1" onchange="f()">
+    <select id="choix_commentaire" size="1" onchange="f_c()">
         <option>--------</option>
         <option> Nom recette </option>
         <option> Commentaire </option>
     </select>
 
-    <select id="sens_commentaire" size="1" onchange="f()">
+    <select id="sens_commentaire" size="1" onchange="f_c()">
         <option> Croissant </option>
         <option> Décroissant </option>
         
@@ -61,7 +61,7 @@
     }
     }
 
-    function f() {
+    function f_c() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {

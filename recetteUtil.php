@@ -10,7 +10,7 @@
 
     <h2>Recettes de l'utilisateur</h2>
     
-    <select id="choix" size="1" onchange="f()">
+    <select id="choix" size="1" onchange="f_r()">
         <option>--------</option>
         <option> Nom </option>
         <option> Note moyenne </option>
@@ -18,7 +18,7 @@
         <option> Nombre personne </option>
     </select>
 
-    <select id="sens" size="1" onchange="f()">
+    <select id="sens" size="1" onchange="f_r()">
         <option> Croissant </option>
         <option> Décroissant </option>
         
@@ -51,7 +51,7 @@
     }
     }
 
-    function f() {
+    function f_r() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
