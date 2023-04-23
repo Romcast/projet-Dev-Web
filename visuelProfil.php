@@ -73,7 +73,7 @@ if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1) {
             <?php endif; ?>
             <?php if (isset($_SESSION['administrateur']) && $_SESSION['administrateur'] == 1){
                 $page="window.location='nouveauUtilSemaine.php?email=$email'";
-                echo "<button onclick=$page >Élire comme utilisateur de la semaine</button>";
+                echo "<button onclick=$page >Élire utilisateur de la semaine</button>";
             }
 
 
