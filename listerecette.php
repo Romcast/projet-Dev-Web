@@ -4,7 +4,7 @@
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
-    $nouvellerecette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Non traitée"');
+    $nouvellerecette=$bdd->query('SELECT * FROM form_recette WHERE traitement="Non traitée"');//Cette requete va permettre de recuperer toute les recettes envoyer a l'administrateur pour qu'il puisse la valider ou non
 ?>
 
 <html>
