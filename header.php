@@ -23,7 +23,7 @@ if(!isset($_SESSION)){
        ?> 
         <nav class="title">
             <h1 onclick="window.location='home.php'">Miam</h1>
-            <a href="notification.php" class="notification-icon">
+            <a href="notification.php" class="notification-icon" id="notif">
         <img class="normal" src="notification-icon.png" alt="Icone de notification normale">
         </a>
             <div class="onglets">

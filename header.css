@@ -7,7 +7,14 @@ nav.title{
     text-align: center;
     font-family: Consolas, monaco, monospace;
     border: thick double black;
+  
+}
 
+#notif{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
 }
 .menu {
     position: relative;
