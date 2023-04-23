@@ -4,12 +4,13 @@ require('header.php');
     $username ="root";
     $password = "";
     $bdd = new PDO("mysql:host=$servername;dbname=miam;", $username, $password);
+//on recupere les donnee existante pour cet id 
 	if(isset($_GET['modif']) AND !empty($_GET['modif'])) {
 	   $modif_id = $_GET['modif'];
 	   $modifrecette = $bdd->prepare('SELECT * FROM form_recette WHERE id = ?');
 	   $modifrecette->execute(array($modif_id));
 
-       $modifingredient = $bdd->prepare('SELECT * FROM form_ingredient WHERE recette_id = ?');
+      	 $modifingredient = $bdd->prepare('SELECT * FROM form_ingredient WHERE recette_id = ?');
 	   $modifingredient->execute(array($modif_id));
 
        $modifetape = $bdd->prepare('SELECT * FROM form_etape WHERE recette_id = ?');
@@ -21,6 +22,7 @@ require('header.php');
 	      die('Erreur : la recette n\'existe pas...');
 	   }
 	}
+//on recupere les nouvelle donnee ajouté a la recette
 	if(isset($_POST['nom'], $_POST['type'],$_POST['nb_personnes'],$_POST['difficulte'],$_POST['conseils'])) {
 	   if(!empty($_POST['nom']) AND !empty($_POST['type']) AND !empty($_POST['nb_personnes']) AND !empty($_POST['difficulte'] AND !empty($_POST['conseils']))) {
 	      
@@ -28,9 +30,6 @@ require('header.php');
         $type= $_POST['type'];
         $nombre = $_POST['nb_personnes'];
         $difficulte = $_POST['difficulte'];
-        //$nouvelleQuantite= $_POST['nouvelleQuantite'];
-        //$nouvelleUnite=$_POST['nouvelleUnite'];
-        //$nouvelIngredient=$_POST['nouvelIngredient'];
         $conseil = $_POST['conseils'];
 	    $update = $bdd->prepare('UPDATE form_recette SET nom = ?, type_repas = ?, nombre_personnes = ?, difficulte=?, conseils=? WHERE id = ?');
 	    $update->execute(array($nom, $type,$nombre,$difficulte,$conseil, $modif_id));
@@ -41,7 +40,7 @@ require('header.php');
 	      $message = 'Veuillez remplir tous les champs';
 	   }
 	}
-    
+    //on s'occupe de la gestion de l'image
     if (isset($_POST['suppr'])){
         if (basename($modifrecette['photo']) !== "recette.png"){
             unlink($modifrecette['photo']);
@@ -89,9 +88,9 @@ require('header.php');
             <!-- <label>Auteur de la recette</label><br>
             <input type="text" id="auteur" name="auteur"><br><br> -->
             <label>Nom de la recette</label><br>
-            <input type="text" id="nom" name="nom" value="<?=  $modifrecette['nom'] ?>"required><br><br>
+            <input type="text" id="nom" name="nom" value="<?=  $modifrecette['nom'] ?>"required><br><br>//Modification du nom de la recette
 
-            <label>Type de recette</label><br>
+            <label>Type de recette</label><br>//modif type recette
             <select id="type" name="type"  required>
                 <option>--------------</option>
                 <option value="Entrée" <?php if($modifrecette['type_repas']=="Entrée"){echo "selected"; }?>>Entrée</option>
@@ -99,17 +98,17 @@ require('header.php');
                 <option value="Dessert"<?php if($modifrecette['type_repas']=="Dessert"){ echo"selected";}?>>Dessert</option>
             </select><br><br>
 
-            <label>Nombre de personne</label><br>
+            <label>Nombre de personne</label><br>//modif nombre personne
             <input type="number" id="nb_personnes" name="nb_personnes" value="<?=  $modifrecette['nombre_personnes'] ?>"  required><br><br>
             
-            <label>Difficulté</label><br>
+            <label>Difficulté</label><br>//modif difficulté
             <select id="difficulte" name="difficulte" required>
                 <option>--------------</option>
                 <option value="Facile"<?php if($modifrecette['difficulte']=="Facile"){echo "selected"; }?>>Facile</option>
                 <option value="Moyenne"<?php if($modifrecette['difficulte']=="Moyenne"){echo "selected"; }?>>Moyenne</option>
                 <option value="Difficile"<?php if($modifrecette['difficulte']=="Difficile"){echo "selected"; }?>>Difficile</option>
             </select><br><br>
-            <label>Ingrédients:</label><br>
+            <label>Ingrédients:</label><br>//modif de la liste d'ingredient
 		    
             <?php if($modifingredient->rowCount()>0){
                 while($i=$modifingredient->fetch()){
@@ -196,7 +195,7 @@ require('header.php');
          </div><br>
          <button id="ajouter_ingredient" onclick="ajouterNouvelIngredient()" type="button">Ajouter ingredient</button><br><br>
             
-            <label>Phases techniques</label><br>
+            <label>Phases techniques</label><br>//modif des phases technique
 		    
             <?php if($modifetape->rowCount()>0){
                 while($e=$modifetape->fetch()){
@@ -242,7 +241,7 @@ require('header.php');
          </div><br>
          <button id="ajouter_etape" onclick="ajouterNouvelleEtape()" type="button">Ajouter étape</button><br><br>
             
-            <label>Dernier conseils du chef</label><br>
+            <label>Dernier conseils du chef</label><br>// modif conseil du chef
 		    <textarea id="conseils" name="conseils" class="text"><?=$modifrecette['conseils'] ?></textarea><br><br>
             <input type="file" id="photo" name="photo" accept="image/jpeg, image/png, image/jpg">
             <input type ="checkbox" id="suppr" name="suppr">
