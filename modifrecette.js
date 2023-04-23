@@ -5,7 +5,7 @@ function ajouterNouvelIngredient() {
   // Add event listener only if it hasn't been added before
   if (!addButton.hasAttribute("data-clicked")) {
     addButton.setAttribute("data-clicked", "true");
-    addButton.addEventListener("click", ajouterIngredient);
+    addButton.addEventListener("click", ajouterIngredient());
   }
 
   function ajouterIngredient() {
