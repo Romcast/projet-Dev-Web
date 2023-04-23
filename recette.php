@@ -49,12 +49,12 @@
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0)
         {
         
-                if ($_FILES['photo']['size'] <= 1000000)
+                if ($_FILES['photo']['size'] <= 1000000)//on vérifie la taille du fichier
                 {
-                    //$nom_fichier = basename($_FILES['photo']['name']);//name recupere le nom du fichier sur le pc
+                    
                     $chemin_fichier = $_FILES['photo']['tmp_name'];//chemin temporaire
             
-                    if(move_uploaded_file($chemin_fichier, 'image/' . $id_recette)) {
+                    if(move_uploaded_file($chemin_fichier, 'image/' . $id_recette)) {//la table est déplacée et renommée selon son id
                             $photo = 'image/' . $id_recette;
                             echo 'voici le chemin de la photo: '.$photo;
 
@@ -74,7 +74,7 @@
             echo " photo introuvable; ";
         }
 
-
+        //on crée la table form_ingredient
         $form_ingredient=  "CREATE TABLE IF NOT EXISTS form_ingredient(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
             nom VARCHAR(50) NOT NULL,
@@ -120,7 +120,7 @@
                 }
             }
         }
-
+        //on crée la table form_etape
         $form_etape=  "CREATE TABLE IF NOT EXISTS form_etape(
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
             etape VARCHAR(200),
