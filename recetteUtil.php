@@ -10,7 +10,7 @@
 
     <h2>Recettes de l'utilisateur</h2>
     
-    <select id="choix" size="1" onchange="f_r()">
+    <select id="choix" size="1" onchange="f()">
         <option>--------</option>
         <option> Nom </option>
         <option> Note moyenne </option>
@@ -18,7 +18,7 @@
         <option> Nombre personne </option>
     </select>
 
-    <select id="sens" size="1" onchange="f_r()">
+    <select id="sens" size="1" onchange="f()">
         <option> Croissant </option>
         <option> Décroissant </option>
         
@@ -33,7 +33,7 @@
 </div>
 
     <script>
-    function filtre_r() {
+    function filtre() {
         var input, filter, ul, li, a, i, txtValue;
         input = document.getElementById("myInput");
         
@@ -51,12 +51,12 @@
     }
     }
 
-    function f_r() {
+    function f() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("liste").innerHTML = this.responseText;
-            filtre_r();
+            filtre();
             }
         };
         var email = "<?php echo $email?>";
