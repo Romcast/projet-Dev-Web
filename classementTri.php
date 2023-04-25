@@ -15,28 +15,29 @@ switch($sens){
 switch($choix){
     case "Note moyenne":
         $user = "SELECT * FROM utilisateur ORDER BY note_moy $s";
+        $u = $conn->query($user);
         break;
     case "Email":
         $user = "SELECT * FROM utilisateur ORDER BY email $s";
+        $u = $conn->query($user);
         break;
     case "Nom":
         $user = "SELECT * FROM utilisateur ORDER BY nom  $s";
+        $u = $conn->query($user);
         break;
     case "Prénom":
         $user = "SELECT * FROM utilisateur ORDER BY prenom $s";
+        $u = $conn->query($user);
         break;
     default:
-        $user = "";
 
 }
 
-$utilisateur = $conn->query($user);
 
-
-if ($utilisateur->num_rows > 0) {
+if (isset($u) && $u != false && $u->num_rows > 0) {
     $i = 1;
     echo "<ul id='myUL'>";
-    while($row = $utilisateur->fetch_assoc()) {
+    while($row = $u->fetch_assoc()) {
         $email = $row['email'];
         $id_user = $row['id_user'];
         if ($email !='admin') {
